@@ -12,4 +12,14 @@ public class BoardLogicTests {
 
 		Assert.AreEqual(new int[] { -1, -1, -1, -1 }, boardLogic.GetBoard());
 	}
+
+    [Test]
+    public void FillBoardWithCells()
+    {
+        int width = 2;
+        int height = 2;
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.FillBoardWithCells();
+        Assert.AreNotEqual(new int[] { -1, -1, -1, -1 }, boardLogic.GetBoard());
+    }
 }

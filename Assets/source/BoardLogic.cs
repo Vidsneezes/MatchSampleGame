@@ -33,6 +33,11 @@ public class BoardLogic {
         }
     }
 
+    public void FillBoardWithCells()
+    {
+
+    }
+
     public int[] GetBoard()
     {
         return boardMatrix;
