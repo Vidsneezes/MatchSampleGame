@@ -38,8 +38,18 @@ public class BoardLogic {
 
     }
 
+    public void ClearConnectedType(int type, int x, int y)
+    {
+
+    }
+
     public int[] GetBoard()
     {
         return boardMatrix;
+    }
+
+    public void SetBoard(int[] newBoard, int _w, int _h)
+    {
+        boardMatrix = newBoard;
     }
 }
