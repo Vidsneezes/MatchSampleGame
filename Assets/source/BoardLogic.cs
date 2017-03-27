@@ -9,8 +9,18 @@ public class BoardLogic {
 
     private int[] boardMatrix;
 
-    public BoardLogic()
+    /*
+    * 0 - green
+    * 1 - blue
+    * 2 - purple
+    * 3 - red
+    * 4 - yellow
+    */
+
+    public BoardLogic(int _w, int _h)
     {
+        boardWidth = _w;
+        boardHeight = _h;
         boardMatrix = new int[boardWidth * boardHeight];
         InitBoard();
     }
@@ -23,5 +33,8 @@ public class BoardLogic {
         }
     }
 
-
+    public int[] GetBoard()
+    {
+        return boardMatrix;
+    }
 }
