@@ -45,7 +45,7 @@ public class BoardLogic {
 
     public bool CanMove(int orX, int orY, int newX, int newY)
     {
-
+        return false;
     }
 
     public int[] GetBoard()
