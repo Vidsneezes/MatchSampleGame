@@ -74,4 +74,40 @@ public class BoardLogicTests {
 
         Assert.AreEqual(false, canMove);
     }
+
+    [Test]
+    public void CanMoveHorizontalIfClearExists()
+    {
+        int width = 3;
+        int height = 3;
+        int[] boardConnection = new int[]
+        {
+            0,1,0,
+            1,0,0,
+            1,0,0
+        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, 3, 3);
+        bool canMove = boardLogic.CanMove(1, 0, 0, 0);
+
+        Assert.AreEqual(true, canMove);
+    }
+
+    [Test]
+    public void CannotMoveHorizontalIfClearDoesntExists()
+    {
+        int width = 3;
+        int height = 3;
+        int[] boardConnection = new int[]
+        {
+            0,1,3,
+            1,0,0,
+            0,0,0
+        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, 3, 3);
+        bool canMove = boardLogic.CanMove(1, 0, 0, 0);
+
+        Assert.AreEqual(false, canMove);
+    }
 }
