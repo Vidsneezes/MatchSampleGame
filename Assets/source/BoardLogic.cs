@@ -61,21 +61,33 @@ public class BoardLogic {
         if (newY - 1 >= 0 && boardMatrix[newX + (newY - 1) * boardWidth] == original)
         {
             possibleConnections += 1;
+            possibleConnections += ConnectionCounter(original, newX - 1, newY - 1);
+            possibleConnections += ConnectionCounter(original, newX + 1, newY - 1);
+            possibleConnections += ConnectionCounter(original, newX , newY - 2);
         }
         //CHeck down of new
         if (newY + 1 < boardHeight && boardMatrix[newX + (newY + 1) * boardWidth] == original)
         {
             possibleConnections += 1;
+            possibleConnections += ConnectionCounter(original, newX - 1, newY + 1);
+            possibleConnections += ConnectionCounter(original, newX + 1, newY + 1);
+            possibleConnections += ConnectionCounter(original, newX, newY + 2);
         }
         //check left of new
         if (newX - 1 >= 0 && boardMatrix[(newX - 1) + newY * boardWidth] == original)
         {
             possibleConnections += 1;
+            possibleConnections += ConnectionCounter(original, newX - 1, newY - 1);
+            possibleConnections += ConnectionCounter(original, newX - 1, newY + 1);
+            possibleConnections += ConnectionCounter(original, newX - 2, newY);
         }
         //check right of new
         if (newX + 1 < boardWidth && boardMatrix[(newX + 1) + newY * boardWidth] == original)
         {
             possibleConnections += 1;
+            possibleConnections += ConnectionCounter(original, newX + 1, newY - 1);
+            possibleConnections += ConnectionCounter(original, newX + 1, newY + 1);
+            possibleConnections += ConnectionCounter(original, newX + 2, newY);
         }
         if (possibleConnections >= 2)
         {
@@ -88,27 +100,10 @@ public class BoardLogic {
     {
         int possibleConnections = 0;
 
-        //Check Up of new
-        if (newY - 1 >= 0 && boardMatrix[newX + (newY - 1) * boardWidth] == original)
+        if (newX >= 0 && newX < boardWidth && newY >= 0 && newY < boardHeight && boardMatrix[newX + newY * boardWidth] == original)
         {
             possibleConnections += 1;
         }
-        //CHeck down of new
-        if (newY + 1 < boardHeight && boardMatrix[newX + (newY + 1) * boardWidth] == original)
-        {
-            possibleConnections += 1;
-        }
-        //check left of new
-        if (newX - 1 >= 0 && boardMatrix[(newX - 1) + newY * boardWidth] == original)
-        {
-            possibleConnections += 1;
-        }
-        //check right of new
-        if (newX + 1 < boardWidth && boardMatrix[(newX + 1) + newY * boardWidth] == original)
-        {
-            possibleConnections += 1;
-        }
-
         return possibleConnections;
     }
 
