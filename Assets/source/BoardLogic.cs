@@ -47,6 +47,8 @@ public class BoardLogic {
 
     public void MovePiece(int orX, int orY, int dirX, int dirY)
     {
+        int startValue = GetValue(orX, orY);
+        int nextValue = GetValue(orX + dirX, orY + dirY);
     }
 
     public void ClearConnectedType(int type, int x, int y)
