@@ -46,6 +46,7 @@ public class BoardLogicTests {
         Assert.AreEqual(new int[] { -1, -1, -1, 0, 0, 0, 0, 0, 0 }, boardLogic.GetBoard());
     }
 
+    [Test]
     public void MovePiecesWithinBoard()
     {
         int width = 3;

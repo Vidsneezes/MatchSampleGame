@@ -49,6 +49,8 @@ public class BoardLogic {
     {
         int startValue = GetValue(orX, orY);
         int nextValue = GetValue(orX + dirX, orY + dirY);
+        SetValue(nextValue, orX, orY);
+        SetValue(startValue, orX + dirX, orY + dirY);
     }
 
     public void ClearConnectedType(int type, int x, int y)
