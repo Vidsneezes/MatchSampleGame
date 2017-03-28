@@ -122,4 +122,14 @@ public class BoardLogic {
     {
         boardMatrix = newBoard;
     }
+
+    public int GetValue(int x, int y)
+    {
+        return boardMatrix[x + boardWidth * y];
+    }
+
+    public void SetValue(int value, int x, int y)
+    {
+        boardMatrix[x + boardWidth * y] = value;
+    }
 }
