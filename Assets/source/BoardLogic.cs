@@ -52,43 +52,45 @@ public class BoardLogic {
 
     public bool CanMove(int orX, int orY, int newX, int newY)
     {
-        int newIndex = newX + newY * boardWidth;
+        int newPosX = orX + newX;
+        int newPosY = orY + newY;
         int original = boardMatrix[orX + orY * boardWidth];
-        int positionalIndex = newX + newY * boardWidth;
         int possibleConnections = 0;
 
-        //Check Up of new
-        if (newY - 1 >= 0 && boardMatrix[newX + (newY - 1) * boardWidth] == original)
+        if (newY == -1)
         {
-            possibleConnections += 1;
-            possibleConnections += ConnectionCounter(original, newX - 1, newY - 1);
-            possibleConnections += ConnectionCounter(original, newX + 1, newY - 1);
-            possibleConnections += ConnectionCounter(original, newX , newY - 2);
-        }
-        //CHeck down of new
-        if (newY + 1 < boardHeight && boardMatrix[newX + (newY + 1) * boardWidth] == original)
+            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX, newPosY - 1);
+            possibleConnections += ConnectionCounter(original, newPosX, newPosY - 2);
+        }else if(newY == 1)
         {
-            possibleConnections += 1;
-            possibleConnections += ConnectionCounter(original, newX - 1, newY + 1);
-            possibleConnections += ConnectionCounter(original, newX + 1, newY + 1);
-            possibleConnections += ConnectionCounter(original, newX, newY + 2);
-        }
-        //check left of new
-        if (newX - 1 >= 0 && boardMatrix[(newX - 1) + newY * boardWidth] == original)
+            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY);
+            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY );
+            possibleConnections += ConnectionCounter(original, newPosX, newPosY + 1);
+            possibleConnections += ConnectionCounter(original, newPosX, newPosY + 2);
+        }else if(newX == -1)
         {
-            possibleConnections += 1;
-            possibleConnections += ConnectionCounter(original, newX - 1, newY - 1);
-            possibleConnections += ConnectionCounter(original, newX - 1, newY + 1);
-            possibleConnections += ConnectionCounter(original, newX - 2, newY);
-        }
-        //check right of new
-        if (newX + 1 < boardWidth && boardMatrix[(newX + 1) + newY * boardWidth] == original)
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 1);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 2);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 1);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 2);
+            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY);
+            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY);
+        }else if(newX == 1)
         {
-            possibleConnections += 1;
-            possibleConnections += ConnectionCounter(original, newX + 1, newY - 1);
-            possibleConnections += ConnectionCounter(original, newX + 1, newY + 1);
-            possibleConnections += ConnectionCounter(original, newX + 2, newY);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 1);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 2);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 1);
+            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 2);
+            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY);
+            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY);
         }
+
         if (possibleConnections >= 2)
         {
             return true;

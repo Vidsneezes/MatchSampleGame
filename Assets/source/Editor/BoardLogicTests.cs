@@ -52,7 +52,7 @@ public class BoardLogicTests {
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
         boardLogic.SetBoard(boardConnection, 3, 3);
-        bool canMove = boardLogic.CanMove(0, 1, 0, 0);
+        bool canMove = boardLogic.CanMove(0, 1, 0, -1);
 
         Assert.AreEqual(true, canMove);
     }
@@ -88,7 +88,7 @@ public class BoardLogicTests {
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
         boardLogic.SetBoard(boardConnection, 3, 3);
-        bool canMove = boardLogic.CanMove(1, 0, 0, 0);
+        bool canMove = boardLogic.CanMove(1, 0, -1, 0);
 
         Assert.AreEqual(true, canMove);
     }
