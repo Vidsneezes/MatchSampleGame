@@ -45,6 +45,10 @@ public class BoardLogic {
         }
     }
 
+    public void MovePiece(int orX, int orY, int dirX, int dirY)
+    {
+    }
+
     public void ClearConnectedType(int type, int x, int y)
     {
 

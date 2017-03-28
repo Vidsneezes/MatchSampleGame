@@ -26,17 +26,24 @@ public class BoardLogicTests {
     [Test]
     public void ClearConnectedType()
     {
-        int width = 2;
-        int height = 2;
+        int width = 3;
+        int height = 3;
         int[] boardConnection = new int[]
         {
-            0,1,1,1
+            0,1,1,
+            1,0,0,
+            0,0,0
         };
-
         BoardLogic boardLogic = new BoardLogic(width, height);
-        boardLogic.SetBoard(boardConnection, 2, 2);
-        boardLogic.ClearConnectedType(1, 1, 1);
-        Assert.AreEqual(new int[] { 0, -1, -1, -1 }, boardLogic.GetBoard());
+        boardLogic.SetBoard(boardConnection, width, height);
+        bool canMove = boardLogic.CanMove(0, 1, 0, -1);
+        Assert.AreEqual(true, canMove);
+        if (canMove)
+        {
+            boardLogic.MovePiece(0, 1, 0, -1);
+            boardLogic.ClearConnectedType(1, 0, 0);
+        }
+        Assert.AreEqual(new int[] { -1, -1, -1, 0, 0, 0, 0, 0, 0 }, boardLogic.GetBoard());
     }
 
     [Test]
@@ -51,7 +58,7 @@ public class BoardLogicTests {
             0,0,0
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
-        boardLogic.SetBoard(boardConnection, 3, 3);
+        boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(0, 1, 0, -1);
 
         Assert.AreEqual(true, canMove);
@@ -69,7 +76,7 @@ public class BoardLogicTests {
             0,0,0
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
-        boardLogic.SetBoard(boardConnection, 3, 3);
+        boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(0, 1, 0, 0);
 
         Assert.AreEqual(false, canMove);
@@ -87,7 +94,7 @@ public class BoardLogicTests {
             1,0,0
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
-        boardLogic.SetBoard(boardConnection, 3, 3);
+        boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(1, 0, -1, 0);
 
         Assert.AreEqual(true, canMove);
@@ -105,7 +112,7 @@ public class BoardLogicTests {
             0,0,0
         };
         BoardLogic boardLogic = new BoardLogic(width, height);
-        boardLogic.SetBoard(boardConnection, 3, 3);
+        boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(1, 0, 0, 0);
 
         Assert.AreEqual(false, canMove);
