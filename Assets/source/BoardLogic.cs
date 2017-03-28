@@ -35,7 +35,14 @@ public class BoardLogic {
 
     public void FillBoardWithCells()
     {
-
+        for (int j = 0; j < boardHeight; j++)
+        {
+            for (int i = 0; i < boardHeight; i++)
+            {
+                int pieceIndex = i + j * boardWidth;
+                boardMatrix[pieceIndex] = Mathf.FloorToInt(Random.Range(0, 1f) * 5);
+            }
+        }   
     }
 
     public void ClearConnectedType(int type, int x, int y)
