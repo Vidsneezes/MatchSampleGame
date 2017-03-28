@@ -55,7 +55,27 @@ public class BoardLogic {
 
     public void ClearConnectedType(int type, int x, int y)
     {
-
+        int pieceValue = GetValue(x, y);
+        if (pieceValue == type)
+        {
+            SetValue(-1, x, y);
+            if (x - 1 >= 0)
+            {
+                ClearConnectedType(type, x - 1, y);
+            }
+            if (x + 1 < boardWidth)
+            {
+                ClearConnectedType(type, x + 1, y);
+            }
+            if (y - 1 >= 0)
+            {
+                ClearConnectedType(type, x, y - 1);
+            }
+            if (y + 1 < boardHeight)
+            {
+                ClearConnectedType(type, x, y + 1);
+            }
+        }
     }
 
     public bool CanMove(int orX, int orY, int newX, int newY)
