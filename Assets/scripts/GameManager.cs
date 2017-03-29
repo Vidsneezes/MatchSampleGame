@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake () {
         boardLogic = new BoardLogic(width, height);
+        boardLogic.FillBoardWithCells();
         activePieces = new List<BoardPieceController>();
         inactivePieces = new List<BoardPieceController>();
         for (int i = 0; i < (width*height)+10; i++)
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour {
         pieceSprite.Add(purplePiece);
         pieceSprite.Add(redPiece);
         pieceSprite.Add(yellowPiece);
-
         CreateFromBoard();
 	}
 
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
             int pieceType = board[i];
+            Debug.Log(pieceType);
             BoardPieceController newPiece = inactivePieces[0];
             inactivePieces.RemoveAt(0);
             newPiece.transform.SetParent(pieceHolder);
