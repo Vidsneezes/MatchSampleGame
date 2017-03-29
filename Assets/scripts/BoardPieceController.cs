@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BoardPieceController : MonoBehaviour , IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
+public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
     public SpriteRenderer spriteRenderer;
 
@@ -45,6 +45,11 @@ public class BoardPieceController : MonoBehaviour , IBeginDragHandler, IEndDragH
 
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
     {
+    }
+
+    void IDragHandler.OnDrag(PointerEventData eventData)
+    {
+        Debug.Log(eventData.delta);
     }
     #endregion
 }
