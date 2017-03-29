@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4456944473278752}
   - component: {fileID: 212792767887625328}
   m_Layer: 0
-  m_Name: CellBlue
+  m_Name: Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
