@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
             piece.gameObject.SetActive(false);
             inactivePieces.Add(piece);
         }
+        CreateFromBoard();
 	}
 
     private void CreateFromBoard()
