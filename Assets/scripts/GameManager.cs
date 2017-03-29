@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public Sprite bluePiece;
+    public Sprite greenPiece;
+    public Sprite purplePiece;
+    public Sprite redPiece;
+    public Sprite yellowPiece;
+
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
