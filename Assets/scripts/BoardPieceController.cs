@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
     public SpriteRenderer spriteRenderer;
+    public int x;
+    public int y;
 
     private void Awake()
     {
@@ -49,7 +51,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        Debug.Log(eventData.delta);
+        
     }
     #endregion
 }
