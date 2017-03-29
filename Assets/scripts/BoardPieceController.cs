@@ -51,7 +51,9 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        
+        if(eventData.delta.x > 0)
+        {
+        }
     }
     #endregion
 }
