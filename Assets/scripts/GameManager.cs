@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour {
     public Transform inactiveHolder;
     private BoardLogic boardLogic;
 
-    // Use this for initialization
     private void Awake () {
         boardLogic = new BoardLogic(width, height);
         activePieces = new List<GameObject>();
