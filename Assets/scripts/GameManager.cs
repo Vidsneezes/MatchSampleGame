@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
     public Sprite purplePiece;
     public Sprite redPiece;
     public Sprite yellowPiece;
-
     /*
    * 0 - green
    * 1 - blue
@@ -31,6 +30,7 @@ public class GameManager : MonoBehaviour {
     public Transform pieceHolder;
     public Transform inactiveHolder;
     private BoardLogic boardLogic;
+    private List<Sprite> pieceSprite;
 
     private void Awake () {
         boardLogic = new BoardLogic(width, height);
@@ -42,6 +42,13 @@ public class GameManager : MonoBehaviour {
             piece.gameObject.SetActive(false);
             inactivePieces.Add(piece);
         }
+        pieceSprite = new List<Sprite>();
+        pieceSprite.Add(greenPiece);
+        pieceSprite.Add(bluePiece);
+        pieceSprite.Add(purplePiece);
+        pieceSprite.Add(redPiece);
+        pieceSprite.Add(yellowPiece);
+
         CreateFromBoard();
 	}
 
@@ -52,9 +59,11 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
+            int pieceType = board[i];
             BoardPieceController newPiece = inactivePieces[0];
             inactivePieces.RemoveAt(0);
             newPiece.transform.SetParent(pieceHolder);
+            newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
             newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*pieceHeight,0);
         }
