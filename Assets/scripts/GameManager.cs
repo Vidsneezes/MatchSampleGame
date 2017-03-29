@@ -10,14 +10,24 @@ public class GameManager : MonoBehaviour {
     public Sprite redPiece;
     public Sprite yellowPiece;
 
+    public GameObject piecePrefab;
+    public List<GameObject> activePieces;
+    public List<GameObject> inactivePieces;
+
+    public int width;
+    public int height;
+    private BoardLogic boardLogic;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+    private void Awake () {
+        boardLogic = new BoardLogic(width, height);
+        activePieces = new List<GameObject>();
+        inactivePieces = new List<GameObject>();
+        for (int i = 0; i < (width*height)+10; i++)
+        {
+            GameObject piece = GameObject.Instantiate(piecePrefab);
+            piece.gameObject.SetActive(false);
+            inactivePieces.Add(piece);
+        }
 	}
 }
