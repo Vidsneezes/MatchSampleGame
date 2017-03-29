@@ -3,21 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
     public SpriteRenderer spriteRenderer;
     public int x;
     public int y;
+    public bool inMotion;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        inMotion = false;
     }
 
     public void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
+    }
+
+    public void OnMotionDone()
+    {
+        inMotion = false;
     }
 
     #region Inpute Logic
@@ -51,8 +59,34 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        if(eventData.delta.x > 0)
+        if (inMotion == false)
         {
+            if (Mathf.Abs(eventData.delta.y) < 5)
+            {
+                if (eventData.delta.x > 0)
+                {
+                    transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                    inMotion = true;
+                }
+                else if (eventData.delta.x < 0)
+                {
+                    transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                    inMotion = true;
+                }
+            }
+            else
+            {
+                if (eventData.delta.y > 0)
+                {
+                    transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                    inMotion = true;
+                }
+                else if (eventData.delta.y < 0)
+                {
+                    transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                    inMotion = true;
+                }
+            }
         }
     }
     #endregion
