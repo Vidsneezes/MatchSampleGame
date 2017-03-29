@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-    public GameObject piecePrefab;
-    public List<GameObject> activePieces;
-    public List<GameObject> inactivePieces;
+    public BoardPieceController piecePrefab;
+    public List<BoardPieceController> activePieces;
+    public List<BoardPieceController> inactivePieces;
 
     public int width;
     public int height;
@@ -34,11 +34,11 @@ public class GameManager : MonoBehaviour {
 
     private void Awake () {
         boardLogic = new BoardLogic(width, height);
-        activePieces = new List<GameObject>();
-        inactivePieces = new List<GameObject>();
+        activePieces = new List<BoardPieceController>();
+        inactivePieces = new List<BoardPieceController>();
         for (int i = 0; i < (width*height)+10; i++)
         {
-            GameObject piece = GameObject.Instantiate(piecePrefab,inactiveHolder);
+            BoardPieceController piece = GameObject.Instantiate(piecePrefab,inactiveHolder);
             piece.gameObject.SetActive(false);
             inactivePieces.Add(piece);
         }
@@ -52,10 +52,10 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
-            GameObject newPiece = inactivePieces[0];
+            BoardPieceController newPiece = inactivePieces[0];
             inactivePieces.RemoveAt(0);
             newPiece.transform.SetParent(pieceHolder);
-            newPiece.SetActive(true);
+            newPiece.gameObject.SetActive(true);
             newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*pieceHeight,0);
         }
     }
