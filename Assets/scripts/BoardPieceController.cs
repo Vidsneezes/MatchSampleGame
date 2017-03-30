@@ -29,6 +29,26 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         inMotion = false;
     }
 
+    public void MoveX(float value)
+    {
+        transform.DOLocalMoveX(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
+    }
+
+    public void FeintMoveX(float value)
+    {
+        transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
+    }
+
+    public void MoveY(float value)
+    {
+        transform.DOLocalMoveY(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
+    }
+
+    public void FeintMoveY(float value)
+    {
+        transform.DOLocalMoveY(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
+    }
+
     #region Inpute Logic
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
@@ -73,11 +93,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     Debug.Log(x + " " + y);
                     if (gameManager.CanMove(x, y, 1, 0))
                     {
-                        transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        MoveX(gameManager.pieceWidth);
                     }
                     else
                     {
-                        transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                        FeintMoveX(gameManager.pieceWidth);
                     }
                     inMotion = true;
 
@@ -86,11 +106,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, -1, 0))
                     {
-                        transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        MoveX(-gameManager.pieceWidth);
                     }
                     else
                     {
-                        transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                        FeintMoveX(-gameManager.pieceWidth);
                     }
                     inMotion = true;
 
@@ -102,11 +122,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, 1))
                     {
-                        transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        MoveY(gameManager.pieceHeight);
                     }
                     else
                     {
-                        transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                        FeintMoveY(gameManager.pieceHeight);
                     }
                     inMotion = true;
 
@@ -115,11 +135,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, -1))
                     {
-                        transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        MoveY(-gameManager.pieceHeight);
                     }
                     else
                     {
-                        transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                        FeintMoveY(-gameManager.pieceHeight);
                     }
                     inMotion = true;
 

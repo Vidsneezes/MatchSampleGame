@@ -77,4 +77,9 @@ public class GameManager : MonoBehaviour {
         return boardLogic.CanMove(x, y, dirX, dirY);
     }
 
+    public void Animate(int x, int y, float positionX, float positionY)
+    {
+
+    }
+
 }
