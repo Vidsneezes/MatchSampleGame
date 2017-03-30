@@ -78,30 +78,30 @@ public class BoardLogic {
         }
     }
 
-    public bool CanMove(int orX, int orY, int newX, int newY)
+    public bool CanMove(int orX, int orY, int dirX, int dirY)
     {
-        int newPosX = orX + newX;
-        int newPosY = orY + newY;
+        int newPosX = orX + dirX;
+        int newPosY = orY + dirY;
         int original = boardMatrix[orX + orY * boardWidth];
         int possibleConnections = 0;
         int val_1 = 0, val_2 = 0, val_3 = 0;
 
-        if (newY == -1)
+        if (dirY == -1)
         {
             val_1 = MakeConnection(original, newPosX , newPosY , -1, 0);
             val_2 = MakeConnection(original, newPosX , newPosY , 1, 0);
-            val_3 = MakeConnection(original, newPosX, newPosY ,0,-1);
-        }else if(newY == 1)
+            val_3 = MakeConnection(original, newPosX, newPosY ,0, -1);
+        }else if(dirY == 1)
         {
             val_1 = MakeConnection(original, newPosX , newPosY,-1,0);
             val_2 = MakeConnection(original, newPosX , newPosY, 1,0 );
             val_3 = MakeConnection(original, newPosX, newPosY ,0,1);
-        }else if(newX == -1)
+        }else if(dirX == -1)
         {
             val_1 = MakeConnection(original, newPosX , newPosY ,0,-1);
             val_2 = MakeConnection(original, newPosX , newPosY ,0,1);
             val_3 = MakeConnection(original, newPosX , newPosY,-1,0);
-        }else if(newX == 1)
+        }else if(dirX == 1)
         {
             val_1 = MakeConnection(original, newPosX , newPosY, 0,-1);
             val_2 = MakeConnection(original, newPosX , newPosY, 0 ,1);

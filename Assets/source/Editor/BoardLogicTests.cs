@@ -77,7 +77,7 @@ public class BoardLogicTests {
     }
 
     [Test]
-    public void CanMoveVerticalIfClearExists()
+    public void CanMoveUponConnections()
     {
         int width = 3;
         int height = 3;
@@ -91,18 +91,23 @@ public class BoardLogicTests {
         boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(0, 1, 0, -1);
         Assert.AreEqual(true, canMove);
+    }
 
-        width = 4;
-        height = 4;
-        boardConnection = new int[]
+    [Test]
+    public void CanMoveFalseOnNoConnections()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
        {
             0,1,1,0,
             0,0,0,1,
             0,0,0,1,
             0,1,0,0
        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
         boardLogic.SetBoard(boardConnection, width, height);
-        canMove = boardLogic.CanMove(1, 3, 0, -1);
+        bool canMove = boardLogic.CanMove(1, 3, 0, -1);
         Assert.AreEqual(false, canMove);
 
         boardConnection = new int[]
@@ -125,7 +130,7 @@ public class BoardLogicTests {
 };
         boardLogic.SetBoard(boardConnection, width, height);
         canMove = boardLogic.CanMove(2, 0, 0, 1);
-        Assert.AreEqual(true, canMove);
+        Assert.AreEqual(false, canMove);
     }
 
     [Test]
