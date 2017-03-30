@@ -11,6 +11,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public int x;
     public int y;
     public bool inMotion;
+    public GameManager gameManager;
 
     private void Awake()
     {
@@ -68,26 +69,38 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             {
                 if (eventData.delta.x > 0)
                 {
-                    transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                    inMotion = true;
+                    if (gameManager.boardLogic.CanMove(x, y, 1, 0))
+                    {
+                        transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        inMotion = true;
+                    }
                 }
                 else if (eventData.delta.x < 0)
                 {
-                    transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                    inMotion = true;
+                    if (gameManager.boardLogic.CanMove(x, y, -1, 0))
+                    {
+                        transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        inMotion = true;
+                    }
                 }
             }
             else
             {
                 if (eventData.delta.y > 0)
                 {
-                    transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                    inMotion = true;
+                    if (gameManager.boardLogic.CanMove(x, y, 0, 1))
+                    {
+                        transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        inMotion = true;
+                    }
                 }
                 else if (eventData.delta.y < 0)
                 {
-                    transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                    inMotion = true;
+                    if (gameManager.boardLogic.CanMove(x, y, 0, -1))
+                    {
+                        transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
+                        inMotion = true;
+                    }
                 }
             }
         }

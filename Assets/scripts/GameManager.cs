@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
     public float verticalOffset;
     public Transform pieceHolder;
     public Transform inactiveHolder;
-    private BoardLogic boardLogic;
+    public BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
 
     private void Awake () {
