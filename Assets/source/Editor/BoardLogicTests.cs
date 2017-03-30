@@ -90,7 +90,36 @@ public class BoardLogicTests {
         BoardLogic boardLogic = new BoardLogic(width, height);
         boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(0, 1, 0, -1);
+        Assert.AreEqual(true, canMove);
 
+        boardConnection = new int[]
+        {
+            0,1,1,
+            1,1,0,
+            0,0,1
+        };
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(2, 2, 0, -1);
+        Assert.AreEqual(true, canMove);
+
+        boardConnection = new int[]
+        {
+            0,1,1,
+            0,0,0,
+            1,0,0
+        };
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(0, 2, 0, -1);
+        Assert.AreEqual(false, canMove);
+
+        boardConnection = new int[]
+       {
+            0,1,1,
+            1,0,1,
+            0,1,1
+       };
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(1, 2, 0, -1);
         Assert.AreEqual(true, canMove);
     }
 

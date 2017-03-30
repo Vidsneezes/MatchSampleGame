@@ -69,6 +69,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             {
                 if (eventData.delta.x > 0)
                 {
+                    Debug.Log(x + " " + y);
                     if (gameManager.boardLogic.CanMove(x, y, 1, 0))
                     {
                         transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
