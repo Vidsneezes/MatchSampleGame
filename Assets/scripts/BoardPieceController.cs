@@ -84,7 +84,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             //TODO Add board logic comfirm before moving
             //TODO added movement to both piece after board has be moved
-            //TODO on failed to move animate both pieces
             //TODO disable touch while pieces move
             //TODO apply board re calculation on can move
             if (Mathf.Abs(eventData.delta.y) < 5)
@@ -99,6 +98,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     else
                     {
                         FeintMoveX(gameManager.pieceWidth);
+                        gameManager.Animate(x + 1, y, -gameManager.pieceWidth, 0);
                     }
                     inMotion = true;
 
@@ -112,6 +112,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     else
                     {
                         FeintMoveX(-gameManager.pieceWidth);
+                        gameManager.Animate(x - 1, y, gameManager.pieceWidth, 0);
+
                     }
                     inMotion = true;
 
@@ -128,6 +130,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     else
                     {
                         FeintMoveY(gameManager.pieceHeight);
+                        gameManager.Animate(x, y + 1, 0, -gameManager.pieceHeight);
+
                     }
                     inMotion = true;
 
@@ -141,6 +145,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     else
                     {
                         FeintMoveY(-gameManager.pieceHeight);
+                        gameManager.Animate(x, y - 1, 0, gameManager.pieceHeight);
+
                     }
                     inMotion = true;
 
