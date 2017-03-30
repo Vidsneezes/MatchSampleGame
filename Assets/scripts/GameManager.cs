@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour {
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
             newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*pieceHeight,0);
+            activePieces.Add(newPiece);
         }
     }
 
@@ -79,7 +80,22 @@ public class GameManager : MonoBehaviour {
 
     public void Animate(int x, int y, float positionX, float positionY)
     {
-
+        int indexN = 0;
+        for (int i = 0; i < activePieces.Count; i++)
+        {
+            if(activePieces[i].x == x && activePieces[i].y == y)
+            {
+                indexN = i;
+                break;
+            }
+        }
+        if (Mathf.Abs(positionX) > 0)
+        {
+            activePieces[indexN].FeintMoveX(positionX);
+        }else if(Mathf.Abs(positionY) > 0)
+        {
+            activePieces[indexN].FeintMoveY(positionY);
+        }
     }
 
 }

@@ -86,6 +86,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             //TODO added movement to both piece after board has be moved
             //TODO on failed to move animate both pieces
             //TODO disable touch while pieces move
+            //TODO apply board re calculation on can move
             if (Mathf.Abs(eventData.delta.y) < 5)
             {
                 if (eventData.delta.x > 0)
