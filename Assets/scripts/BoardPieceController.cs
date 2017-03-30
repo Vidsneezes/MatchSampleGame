@@ -64,6 +64,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             //TODO Add board logic comfirm before moving
             //TODO added movement to both piece after board has be moved
+            //TODO on failed to move animate both pieces
             //TODO disable touch while pieces move
             if (Mathf.Abs(eventData.delta.y) < 5)
             {
@@ -73,16 +74,26 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     if (gameManager.boardLogic.CanMove(x, y, 1, 0))
                     {
                         transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                        inMotion = true;
                     }
+                    else
+                    {
+                        transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                    }
+                    inMotion = true;
+
                 }
                 else if (eventData.delta.x < 0)
                 {
                     if (gameManager.boardLogic.CanMove(x, y, -1, 0))
                     {
                         transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                        inMotion = true;
                     }
+                    else
+                    {
+                        transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                    }
+                    inMotion = true;
+
                 }
             }
             else
@@ -92,16 +103,26 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     if (gameManager.boardLogic.CanMove(x, y, 0, 1))
                     {
                         transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                        inMotion = true;
                     }
+                    else
+                    {
+                        transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                    }
+                    inMotion = true;
+
                 }
                 else if (eventData.delta.y < 0)
                 {
                     if (gameManager.boardLogic.CanMove(x, y, 0, -1))
                     {
                         transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
-                        inMotion = true;
                     }
+                    else
+                    {
+                        transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().SetLoops(2,LoopType.Yoyo).OnComplete(OnMotionDone);
+                    }
+                    inMotion = true;
+
                 }
             }
         }
