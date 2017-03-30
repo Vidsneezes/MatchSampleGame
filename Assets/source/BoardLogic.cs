@@ -84,41 +84,30 @@ public class BoardLogic {
         int newPosY = orY + newY;
         int original = boardMatrix[orX + orY * boardWidth];
         int possibleConnections = 0;
+        int val_1 = 0, val_2 = 0, val_3 = 0;
 
         if (newY == -1)
         {
-            int hor_1 = ConnectionCounter(original, newPosX - 1, newPosY );
-            hor_1 += hor_1 > 0 ? possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY) : 0;
-            int hor_2 = ConnectionCounter(original, newPosX + 1, newPosY );
-            hor_2 += hor_2 > 0 ? possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY ) : 0;
-            int ver_1 = ConnectionCounter(original, newPosX, newPosY - 1);
-            possibleConnections += ConnectionCounter(original, newPosX, newPosY - 2);
-            possibleConnections = hor_1 + hor_2 + ver_1;
+            val_1 = MakeConnection(original, newPosX , newPosY , -1, 0);
+            val_2 = MakeConnection(original, newPosX , newPosY , 1, 0);
+            val_3 = MakeConnection(original, newPosX, newPosY ,0,-1);
         }else if(newY == 1)
         {
-            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY);
-            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX, newPosY + 1);
-            possibleConnections += ConnectionCounter(original, newPosX, newPosY + 2);
+            val_1 = MakeConnection(original, newPosX , newPosY,-1,0);
+            val_2 = MakeConnection(original, newPosX , newPosY, 1,0 );
+            val_3 = MakeConnection(original, newPosX, newPosY ,0,1);
         }else if(newX == -1)
         {
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 1);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 2);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 1);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 2);
-            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY);
-            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY);
+            val_1 = MakeConnection(original, newPosX , newPosY ,0,-1);
+            val_2 = MakeConnection(original, newPosX , newPosY ,0,1);
+            val_3 = MakeConnection(original, newPosX , newPosY,-1,0);
         }else if(newX == 1)
         {
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 1);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY - 2);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 1);
-            possibleConnections += ConnectionCounter(original, newPosX , newPosY + 2);
-            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY);
-            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY);
+            val_1 = MakeConnection(original, newPosX , newPosY, 0,-1);
+            val_2 = MakeConnection(original, newPosX , newPosY, 0 ,1);
+            val_3 = MakeConnection(original, newPosX , newPosY,1,0);
         }
+        possibleConnections = val_1 + val_2 + val_3;
 
         if (possibleConnections >= 2)
         {
@@ -152,6 +141,8 @@ public class BoardLogic {
 
     public void SetBoard(int[] newBoard, int _w, int _h)
     {
+        boardWidth = _w;
+        boardHeight = _h;
         boardMatrix = newBoard;
     }
 

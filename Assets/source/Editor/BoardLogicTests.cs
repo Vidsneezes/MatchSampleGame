@@ -92,6 +92,8 @@ public class BoardLogicTests {
         bool canMove = boardLogic.CanMove(0, 1, 0, -1);
         Assert.AreEqual(true, canMove);
 
+        width = 4;
+        height = 4;
         boardConnection = new int[]
        {
             0,1,1,0,
