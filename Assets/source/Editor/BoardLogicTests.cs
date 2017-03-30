@@ -93,33 +93,36 @@ public class BoardLogicTests {
         Assert.AreEqual(true, canMove);
 
         boardConnection = new int[]
-        {
-            0,1,1,
-            1,1,0,
-            0,0,1
-        };
+       {
+            0,1,1,0,
+            0,0,0,1,
+            0,0,0,1,
+            0,1,0,0
+       };
         boardLogic.SetBoard(boardConnection, width, height);
-        canMove = boardLogic.CanMove(2, 2, 0, -1);
-        Assert.AreEqual(true, canMove);
-
-        boardConnection = new int[]
-        {
-            0,1,1,
-            0,0,0,
-            1,0,0
-        };
-        boardLogic.SetBoard(boardConnection, width, height);
-        canMove = boardLogic.CanMove(0, 2, 0, -1);
+        canMove = boardLogic.CanMove(1, 3, 0, -1);
         Assert.AreEqual(false, canMove);
 
         boardConnection = new int[]
-       {
-            0,1,1,
-            1,0,1,
-            0,1,1
-       };
+      {
+            0,1,1,0,
+            0,0,0,1,
+            0,0,0,1,
+            0,0,0,0
+      };
         boardLogic.SetBoard(boardConnection, width, height);
-        canMove = boardLogic.CanMove(1, 2, 0, -1);
+        canMove = boardLogic.CanMove(3, 1, 0, -1);
+        Assert.AreEqual(true, canMove);
+
+        boardConnection = new int[]
+{
+            0,1,1,0,
+            0,0,0,1,
+            0,0,0,1,
+            0,0,0,0
+};
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(2, 0, 0, 1);
         Assert.AreEqual(true, canMove);
     }
 

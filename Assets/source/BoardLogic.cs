@@ -87,12 +87,13 @@ public class BoardLogic {
 
         if (newY == -1)
         {
-            possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX + 1, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY );
-            possibleConnections += ConnectionCounter(original, newPosX, newPosY - 1);
+            int hor_1 = ConnectionCounter(original, newPosX - 1, newPosY );
+            hor_1 += hor_1 > 0 ? possibleConnections += ConnectionCounter(original, newPosX - 2, newPosY) : 0;
+            int hor_2 = ConnectionCounter(original, newPosX + 1, newPosY );
+            hor_2 += hor_2 > 0 ? possibleConnections += ConnectionCounter(original, newPosX + 2, newPosY ) : 0;
+            int ver_1 = ConnectionCounter(original, newPosX, newPosY - 1);
             possibleConnections += ConnectionCounter(original, newPosX, newPosY - 2);
+            possibleConnections = hor_1 + hor_2 + ver_1;
         }else if(newY == 1)
         {
             possibleConnections += ConnectionCounter(original, newPosX - 1, newPosY);
@@ -124,6 +125,13 @@ public class BoardLogic {
             return true;
         }
         return false;
+    }
+
+    public int MakeConnection(int original, int newX, int newY, int dirX, int dirY)
+    {
+        int value = ConnectionCounter(original, newX + dirX, newY + dirY);
+        value += value > 0 ? ConnectionCounter(original, newX + (dirX * 2), newY + (dirY*2)) : 0;
+        return value;
     }
 
     public int ConnectionCounter(int original,int newX, int newY)
