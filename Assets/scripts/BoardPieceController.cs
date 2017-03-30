@@ -71,7 +71,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 if (eventData.delta.x > 0)
                 {
                     Debug.Log(x + " " + y);
-                    if (gameManager.boardLogic.CanMove(x, y, 1, 0))
+                    if (gameManager.CanMove(x, y, 1, 0))
                     {
                         transform.DOLocalMoveX(1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
                     }
@@ -84,7 +84,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 }
                 else if (eventData.delta.x < 0)
                 {
-                    if (gameManager.boardLogic.CanMove(x, y, -1, 0))
+                    if (gameManager.CanMove(x, y, -1, 0))
                     {
                         transform.DOLocalMoveX(-1.29f, 0.3f).SetRelative().OnComplete(OnMotionDone);
                     }
@@ -100,7 +100,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             {
                 if (eventData.delta.y > 0)
                 {
-                    if (gameManager.boardLogic.CanMove(x, y, 0, 1))
+                    if (gameManager.CanMove(x, y, 0, 1))
                     {
                         transform.DOLocalMoveY(1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
                     }
@@ -113,7 +113,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 }
                 else if (eventData.delta.y < 0)
                 {
-                    if (gameManager.boardLogic.CanMove(x, y, 0, -1))
+                    if (gameManager.CanMove(x, y, 0, -1))
                     {
                         transform.DOLocalMoveY(-1.385f, 0.3f).SetRelative().OnComplete(OnMotionDone);
                     }

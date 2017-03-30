@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
     public float verticalOffset;
     public Transform pieceHolder;
     public Transform inactiveHolder;
-    public BoardLogic boardLogic;
+    private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
 
     private void Awake () {
@@ -72,5 +72,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool CanMove(int x, int y, int dirX, int dirY)
+    {
+        return boardLogic.CanMove(x, y, dirX, dirY);
+    }
 
 }
