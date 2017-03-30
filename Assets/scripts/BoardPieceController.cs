@@ -61,6 +61,9 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     {
         if (inMotion == false)
         {
+            //TODO Add board logic comfirm before moving
+            //TODO added movement to both piece after board has be moved
+            //TODO disable touch while pieces move
             if (Mathf.Abs(eventData.delta.y) < 5)
             {
                 if (eventData.delta.x > 0)
