@@ -3,6 +3,7 @@ using UnityEditor;
 using NUnit.Framework;
 
 public class BoardLogicTests {
+    //TODO add messages to asserts
 
 	[Test]
 	public void BoardFillEmpty() {
@@ -91,6 +92,19 @@ public class BoardLogicTests {
         boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(0, 1, 0, -1);
         Assert.AreEqual(true, canMove);
+
+        width = 4;
+        height = 4;
+        boardConnection = new int[]
+   {
+            0,1,1,0,
+            0,0,0,1,
+            0,0,0,1,
+            0,0,0,0
+   };
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(3, 1, 0, -1);
+        Assert.AreEqual(true, canMove);
     }
 
     [Test]
@@ -108,18 +122,7 @@ public class BoardLogicTests {
         BoardLogic boardLogic = new BoardLogic(width, height);
         boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(1, 3, 0, -1);
-        Assert.AreEqual(false, canMove);
-
-        boardConnection = new int[]
-      {
-            0,1,1,0,
-            0,0,0,1,
-            0,0,0,1,
-            0,0,0,0
-      };
-        boardLogic.SetBoard(boardConnection, width, height);
-        canMove = boardLogic.CanMove(3, 1, 0, -1);
-        Assert.AreEqual(true, canMove);
+        Assert.AreEqual(false, canMove,"no neighbors are connected cannot move");
 
         boardConnection = new int[]
 {
@@ -130,7 +133,7 @@ public class BoardLogicTests {
 };
         boardLogic.SetBoard(boardConnection, width, height);
         canMove = boardLogic.CanMove(2, 0, 0, 1);
-        Assert.AreEqual(false, canMove);
+        Assert.AreEqual(false, canMove,"only 1 natural connection cannot move");
     }
 
     [Test]
@@ -152,7 +155,7 @@ public class BoardLogicTests {
     }
 
     [Test]
-    public void CanMoveHorizontalIfClearExists()
+    public void CanMoveHorizontalOnConnection()
     {
         int width = 3;
         int height = 3;
@@ -166,6 +169,19 @@ public class BoardLogicTests {
         boardLogic.SetBoard(boardConnection, width, height);
         bool canMove = boardLogic.CanMove(1, 0, -1, 0);
 
+        Assert.AreEqual(true, canMove);
+
+        width = 4;
+        height = 4;
+        boardConnection = new int[]
+{
+            0,1,1,0,
+            0,0,0,1,
+            0,0,0,1,
+            0,0,0,0
+};
+        boardLogic.SetBoard(boardConnection, width, height);
+        canMove = boardLogic.CanMove(2, 0, 1, 0);
         Assert.AreEqual(true, canMove);
     }
 
