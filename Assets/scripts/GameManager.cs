@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour {
             newPiece.transform.SetParent(pieceHolder);
             newPiece.x = x;
             newPiece.y = y;
+            newPiece.gameManager = this;
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
             newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*pieceHeight,0);
