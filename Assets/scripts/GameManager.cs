@@ -111,11 +111,11 @@ public class GameManager : MonoBehaviour {
         }
         if (Mathf.Abs(positionX) > 0)
         {
-            activePieces[indexN].MoveX(positionX);
+            activePieces[indexN].MoveX(positionX,(int)Mathf.Sign(positionX));
         }
         else if (Mathf.Abs(positionY) > 0)
         {
-            activePieces[indexN].MoveY(positionY);
+            activePieces[indexN].MoveY(positionY,(int)Mathf.Sign(positionY));
         }
     }
 
