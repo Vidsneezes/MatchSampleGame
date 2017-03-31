@@ -78,6 +78,38 @@ public class BoardLogicTests {
     }
 
     [Test]
+    public void MovePiecesWithinBoardLarge()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
+        {
+            0,1,1,0,
+            1,0,0,1,
+            0,1,0,1,
+            1,0,1,0
+        };
+
+        int[] expectedBoard = new int[]
+        {
+            0,1,1,0,
+            0,1,0,1,
+            0,1,0,1,
+            1,0,1,0
+       };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, width, height);
+        bool canMove = boardLogic.CanMove(0, 1, 1, 0);
+        Assert.AreEqual(true, canMove);
+        if (canMove)
+        {
+            boardLogic.MovePiece(0, 1, 1, 0);
+        }
+        Assert.AreEqual(expectedBoard, boardLogic.GetBoard());
+
+    }
+
+    [Test]
     public void CanMoveUponConnections()
     {
         int width = 3;

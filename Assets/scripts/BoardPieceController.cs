@@ -31,16 +31,23 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     public void MoveX(float value, bool recalc = false, int otherx = 0, int othery = 0)
     {
-        transform.DOLocalMoveX(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
+        MoveX(value);
         if (recalc)
         {
             gameManager.RecalculateBoard(x, y, otherx, othery);
         }
     }
 
-    public void FeintMoveX(float value)
+    public void MoveX(float value, int dirx = 0, int diry = 0)
     {
-        transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
+        MoveX(value);
+        x += dirx;
+        y += diry;
+    }
+
+    public void MoveX(float value)
+    {
+        transform.DOLocalMoveX(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
     }
 
     public void MoveY(float value, bool recalc = false, int otherx = 0, int othery = 0)
@@ -50,6 +57,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             gameManager.RecalculateBoard(x, y, otherx, othery);
         }
+    }
+
+    public void FeintMoveX(float value)
+    {
+        transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
     }
 
     public void FeintMoveY(float value)
