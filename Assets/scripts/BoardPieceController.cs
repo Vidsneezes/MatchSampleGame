@@ -12,9 +12,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public int y;
     public bool inMotion;
     public GameManager gameManager;
+    private bool recalculate;
 
     private void Awake()
     {
+        recalculate = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         inMotion = false;
     }
@@ -97,6 +99,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     Debug.Log(x + " " + y);
                     if (gameManager.CanMove(x, y, 1, 0))
                     {
+                        recalculate = true;
                         MoveX(gameManager.pieceWidth);
                         gameManager.Animate(x+1,y, -gameManager.pieceWidth, 0);
                     }
@@ -112,6 +115,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, -1, 0))
                     {
+                        recalculate = true;
                         MoveX(-gameManager.pieceWidth);
                         gameManager.Animate(x - 1, y, gameManager.pieceWidth, 0);
                     }
@@ -131,6 +135,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, 1))
                     {
+                        recalculate = true;
                         MoveY(gameManager.pieceHeight);
                         gameManager.Animate(x, y + 1, 0, -gameManager.pieceHeight);
                     }
@@ -147,6 +152,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, -1))
                     {
+                        recalculate = true;
                         MoveY(-gameManager.pieceHeight);
                         gameManager.Animate(x, y - 1, 0, gameManager.pieceHeight);
                     }
