@@ -105,7 +105,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     Debug.Log(x + " " + y);
                     if (gameManager.CanMove(x, y, 1, 0))
                     {
-                        MoveX(gameManager.pieceWidth);
+                        MoveX(gameManager.pieceWidth,true,x+1,y);
                         gameManager.Animate(x+1,y, -gameManager.pieceWidth, 0);
                     }
                     else
@@ -120,7 +120,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, -1, 0))
                     {
-                        MoveX(-gameManager.pieceWidth);
+                        MoveX(-gameManager.pieceWidth, true , x-1, y);
                         gameManager.Animate(x - 1, y, gameManager.pieceWidth, 0);
                     }
                     else
@@ -139,7 +139,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, 1))
                     {
-                        MoveY(gameManager.pieceHeight);
+                        MoveY(gameManager.pieceHeight, true, x, y+1);
                         gameManager.Animate(x, y + 1, 0, -gameManager.pieceHeight);
                     }
                     else
@@ -155,7 +155,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 {
                     if (gameManager.CanMove(x, y, 0, -1))
                     {
-                        MoveY(-gameManager.pieceHeight);
+                        MoveY(-gameManager.pieceHeight,true,x,y-1);
                         gameManager.Animate(x, y - 1, 0, gameManager.pieceHeight);
                     }
                     else
