@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
         return boardLogic.CanMove(x, y, dirX, dirY);
     }
 
-    public void Animate(int x, int y, float positionX, float positionY)
+    public void AnimateFeint(int x, int y, float positionX, float positionY)
     {
         int indexN = 0;
         for (int i = 0; i < activePieces.Count; i++)
@@ -95,6 +95,27 @@ public class GameManager : MonoBehaviour {
         }else if(Mathf.Abs(positionY) > 0)
         {
             activePieces[indexN].FeintMoveY(positionY);
+        }
+    }
+
+    public void Animate(int x, int y, float positionX, float positionY)
+    {
+        int indexN = 0;
+        for (int i = 0; i < activePieces.Count; i++)
+        {
+            if (activePieces[i].x == x && activePieces[i].y == y)
+            {
+                indexN = i;
+                break;
+            }
+        }
+        if (Mathf.Abs(positionX) > 0)
+        {
+            activePieces[indexN].MoveX(positionX);
+        }
+        else if (Mathf.Abs(positionY) > 0)
+        {
+            activePieces[indexN].MoveY(positionY);
         }
     }
 
