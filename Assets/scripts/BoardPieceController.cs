@@ -12,6 +12,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public int y;
     public bool inMotion;
     public GameManager gameManager;
+    private int moveDir;
+    private int typeDir;
 
     private void Awake()
     {
@@ -27,6 +29,19 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public void OnMotionDone()
     {
         inMotion = false;
+        if(typeDir == 0)
+        {
+            y += moveDir;
+        }else if(typeDir == 1)
+        {
+            x += moveDir;
+        }
+    }
+
+    public void OnMotionDoneDummy()
+    {
+        inMotion = false;
+      
     }
 
     public void MoveX(float value, bool recalc = false, int dir = 0)
@@ -34,7 +49,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         MoveX(value);
         if (recalc)
         {
-            x += dir;
+            typeDir = 1;
+            moveDir = dir;
             gameManager.RecalculateBoard(x, y, dir, 0);
         }
     }
@@ -42,7 +58,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public void MoveX(float value, int dirx = 0)
     {
         MoveX(value);
-        x += dirx;
+        typeDir = 1;
+        moveDir = dirx;
     }
 
     public void MoveX(float value)
@@ -55,7 +72,9 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         MoveY(value);
         if (recalc)
         {
-            y += dir;
+
+            typeDir = 0;
+            moveDir = dir;
             gameManager.RecalculateBoard(x, y, 0, dir);
         }
     }
@@ -63,7 +82,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public void MoveY(float value, int diry = 0)
     {
         MoveY(value);
-        y += diry;
+        typeDir = 0;
+        moveDir = diry;
     }
 
     public void MoveY(float value)
@@ -73,12 +93,12 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     public void FeintMoveX(float value)
     {
-        transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
+        transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDoneDummy);
     }
 
     public void FeintMoveY(float value)
     {
-        transform.DOLocalMoveY(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
+        transform.DOLocalMoveY(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDoneDummy);
     }
 
     #region Inpute Logic
