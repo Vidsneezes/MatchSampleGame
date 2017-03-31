@@ -12,13 +12,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public int y;
     public bool inMotion;
     public GameManager gameManager;
-    private Action<int,int,int,int> recalculate;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         inMotion = false;
-        recalculate = gameManager.RecalculateBoard;
     }
 
     public void SetSprite(Sprite sprite)
@@ -31,9 +29,13 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         inMotion = false;
     }
 
-    public void MoveX(float value)
+    public void MoveX(float value, bool recalc = false, int otherx = 0, int othery = 0)
     {
         transform.DOLocalMoveX(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
+        if (recalc)
+        {
+            gameManager.RecalculateBoard(x, y, otherx, othery);
+        }
     }
 
     public void FeintMoveX(float value)
@@ -41,9 +43,13 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         transform.DOLocalMoveX(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDone);
     }
 
-    public void MoveY(float value)
+    public void MoveY(float value, bool recalc = false, int otherx = 0, int othery = 0)
     {
         transform.DOLocalMoveY(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
+        if (recalc)
+        {
+            gameManager.RecalculateBoard(x, y, otherx, othery);
+        }
     }
 
     public void FeintMoveY(float value)
