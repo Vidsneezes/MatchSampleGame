@@ -119,4 +119,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void RecalculateBoard(int x, int y, int otherx, int othery)
+    {
+        boardLogic.MovePiece(x, y, otherx, othery);
+    }
 }
