@@ -140,6 +140,12 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
             //TODO clear pieces on board move
 
+            //TODO Pool pieces that get removed by clear
+
+            //TODO animate new pieces to fall down in their place
+
+            //TODO disable touch while pieces are falling
+
 
             if (Mathf.Abs(eventData.delta.y) < 5)
             {
