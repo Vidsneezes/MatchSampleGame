@@ -49,6 +49,21 @@ public class BoardLogic {
         }
     }
 
+    public void RefillBoard()
+    {
+        for (int j = 0; j < boardHeight; j++)
+        {
+            for (int i = 0; i < boardHeight; i++)
+            {
+                int pieceIndex = i + j * boardWidth;
+                if (boardMatrix[pieceIndex] == -1)
+                {
+                    boardMatrix[pieceIndex] = Mathf.FloorToInt(Random.Range(0, 1f) * 5);
+                }
+            }
+        }
+    }
+
     public void MovePiece(int orX, int orY, int dirX, int dirY)
     {
         int startValue = GetValue(orX, orY);
