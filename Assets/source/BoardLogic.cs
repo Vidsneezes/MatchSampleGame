@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BoardLogic {
 
-    //TODO add function that fills board with random value where a -1 is present
-
-    //TODO write unit test for -1 fill
-
     private int boardWidth;
     private int boardHeight;
 

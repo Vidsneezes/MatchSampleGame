@@ -257,4 +257,35 @@ public class BoardLogicTests {
         canMove = boardLogic.CanMove(0, 2, 0, 1);
         Assert.AreEqual(false, canMove);
     }
+
+    [Test]
+    public void RefillsBoardOnVoidedSpots()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
+        {
+            0,1,3,0,
+            1,0,-1,0,
+            -1,-1,-1,-1,
+            1,1,1,1
+        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, width, height);
+
+        boardLogic.RefillBoard();
+        int[] board = boardLogic.GetBoard();
+        bool hasNegative = false;
+        for (int i = 0; i < board.Length; i++)
+        {
+            if(board[i] < 0)
+            {
+                hasNegative = true;
+            }
+        }
+
+        Assert.AreEqual(false, hasNegative);
+
+
+    }
 }
