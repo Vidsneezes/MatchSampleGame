@@ -36,11 +36,14 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             x += moveDir;
         }
+        gameManager.canMove = true;
+
     }
 
     public void OnMotionDoneDummy()
     {
         inMotion = false;
+        gameManager.canMove = true;
       
     }
 
@@ -132,11 +135,16 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
+        if(gameManager.canMove == false)
+        {
+            return;
+        }
+
         if (inMotion == false)
         {
 
 
-            //TODO disable touch while pieces move
+           
 
             //TODO clear pieces on board move
 
@@ -163,7 +171,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                         gameManager.AnimateFeint(x + 1, y, -gameManager.pieceWidth, 0);
                     }
                     inMotion = true;
-
+                    gameManager.canMove = false;
                 }
                 else if (eventData.delta.x < 0)
                 {
@@ -179,6 +187,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
                     }
                     inMotion = true;
+                    gameManager.canMove = false;
 
                 }
             }
@@ -198,6 +207,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
                     }
                     inMotion = true;
+                    gameManager.canMove = false;
 
                 }
                 else if (eventData.delta.y < 0)
@@ -213,6 +223,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                         gameManager.AnimateFeint(x, y - 1, 0, gameManager.pieceHeight);
                     }
                     inMotion = true;
+                    gameManager.canMove = false;
 
                 }
             }

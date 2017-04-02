@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
     public float verticalOffset;
     public Transform pieceHolder;
     public Transform inactiveHolder;
+    public bool canMove;
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
 
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour {
         pieceSprite.Add(redPiece);
         pieceSprite.Add(yellowPiece);
         CreateFromBoard();
+        canMove = true;
 	}
 
     private void CreateFromBoard()
