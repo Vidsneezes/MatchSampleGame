@@ -17,6 +17,10 @@ public class BoardLogic {
     * 4 - yellow
     */
 
+    //TODO add routine to drop pieces that have a down neightbor thats -1
+
+        //TODO add test for falling down pieces
+
     public BoardLogic(int _w, int _h)
     {
         boardWidth = _w;

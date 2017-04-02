@@ -144,8 +144,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
 
 
-           
-
             //TODO clear pieces on board move
 
             //TODO Pool pieces that get removed by clear
