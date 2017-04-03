@@ -137,7 +137,25 @@ public class GameManager : MonoBehaviour {
 
     public void RemovePieces()
     {
-
+        int[] board = boardLogic.GetBoard();
+        for (int i = 0; i < board.Length; i++)
+        {
+            int y = Mathf.FloorToInt(i / boardLogic.boardWidth);
+            int x = i - (y * boardLogic.boardWidth);
+            int bpc = -1;
+            for (int j = 0; j < activePieces.Count; j++)
+            {
+                if (activePieces[j].x == x && activePieces[j].y == y)
+                {
+                    bpc = j;
+                    break;
+                }
+            }
+            if (bpc >= 0)
+            {
+                RemovePiece(activePieces[bpc]);
+            }
+        }
     }
 
     public void RemovePiece(BoardPieceController boardPieceController)

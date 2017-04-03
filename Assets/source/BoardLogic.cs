@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class BoardLogic {
 
-    private int boardWidth;
-    private int boardHeight;
+    public int boardWidth
+    {
+        get
+        {
+            return _boardWidth;
+        }
+    }
+
+    public int boardHeight
+    {
+        get
+        {
+            return _boardHeight;
+        }
+    }
+
+    private int _boardWidth;
+    private int _boardHeight;
 
     private int[] boardMatrix;
 
@@ -19,19 +35,19 @@ public class BoardLogic {
 
     //TODO add routine to drop pieces that have a down neightbor thats -1
 
-        //TODO add test for falling down pieces
+    //TODO add test for falling down pieces
 
     public BoardLogic(int _w, int _h)
     {
-        boardWidth = _w;
-        boardHeight = _h;
-        boardMatrix = new int[boardWidth * boardHeight];
+        _boardWidth = _w;
+        _boardHeight = _h;
+        boardMatrix = new int[_boardWidth * _boardHeight];
         InitBoard();
     }
 
     public void InitBoard()
     {
-        for (int i = 0; i < boardWidth * boardHeight; i++)
+        for (int i = 0; i < _boardWidth * _boardHeight; i++)
         {
             boardMatrix[i] = -1;
         }
@@ -39,11 +55,11 @@ public class BoardLogic {
 
     public void FillBoardWithCells()
     {
-        for (int j = 0; j < boardHeight; j++)
+        for (int j = 0; j < _boardHeight; j++)
         {
-            for (int i = 0; i < boardHeight; i++)
+            for (int i = 0; i < _boardHeight; i++)
             {
-                int pieceIndex = i + j * boardWidth;
+                int pieceIndex = i + j * _boardWidth;
                 boardMatrix[pieceIndex] = Mathf.FloorToInt(Random.Range(0, 1f) * 5);
             }
         }
@@ -51,11 +67,11 @@ public class BoardLogic {
 
     public void RefillBoard()
     {
-        for (int j = 0; j < boardHeight; j++)
+        for (int j = 0; j < _boardHeight; j++)
         {
-            for (int i = 0; i < boardHeight; i++)
+            for (int i = 0; i < _boardHeight; i++)
             {
-                int pieceIndex = i + j * boardWidth;
+                int pieceIndex = i + j * _boardWidth;
                 if (boardMatrix[pieceIndex] == -1)
                 {
                     boardMatrix[pieceIndex] = Mathf.FloorToInt(Random.Range(0, 1f) * 5);
@@ -82,7 +98,7 @@ public class BoardLogic {
             {
                 ClearConnectedType(type, x - 1, y);
             }
-            if (x + 1 < boardWidth)
+            if (x + 1 < _boardWidth)
             {
                 ClearConnectedType(type, x + 1, y);
             }
@@ -90,7 +106,7 @@ public class BoardLogic {
             {
                 ClearConnectedType(type, x, y - 1);
             }
-            if (y + 1 < boardHeight)
+            if (y + 1 < _boardHeight)
             {
                 ClearConnectedType(type, x, y + 1);
             }
@@ -101,7 +117,7 @@ public class BoardLogic {
     {
         int newPosX = orX + dirX;
         int newPosY = orY + dirY;
-        int original = boardMatrix[orX + orY * boardWidth];
+        int original = boardMatrix[orX + orY * _boardWidth];
         int possibleConnections = 0;
         int val_1 = 0, val_2 = 0, val_3 = 0;
 
@@ -146,7 +162,7 @@ public class BoardLogic {
     {
         int possibleConnections = 0;
 
-        if (newX >= 0 && newX < boardWidth && newY >= 0 && newY < boardHeight && boardMatrix[newX + newY * boardWidth] == original)
+        if (newX >= 0 && newX < _boardWidth && newY >= 0 && newY < _boardHeight && boardMatrix[newX + newY * _boardWidth] == original)
         {
             possibleConnections += 1;
         }
@@ -160,18 +176,18 @@ public class BoardLogic {
 
     public void SetBoard(int[] newBoard, int _w, int _h)
     {
-        boardWidth = _w;
-        boardHeight = _h;
+        _boardWidth = _w;
+        _boardHeight = _h;
         boardMatrix = newBoard;
     }
 
     public int GetValue(int x, int y)
     {
-        return boardMatrix[x + boardWidth * y];
+        return boardMatrix[x + _boardWidth * y];
     }
 
     public void SetValue(int value, int x, int y)
     {
-        boardMatrix[x + boardWidth * y] = value;
+        boardMatrix[x + _boardWidth * y] = value;
     }
 }
