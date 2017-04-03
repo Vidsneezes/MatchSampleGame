@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour {
 
     //TODO clear pieces on board move
 
+    //TODO animate new pieces to fall down in their place
+
+    //TODO Pool pieces that get removed by clear
+
+    //TODO disable touch while pieces are falling
+
 
     public BoardPieceController piecePrefab;
     public List<BoardPieceController> activePieces;

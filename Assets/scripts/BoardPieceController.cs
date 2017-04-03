@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
+    //TODO add functions to animate falling into place
+
     public SpriteRenderer spriteRenderer;
     public int x;
     public int y;
@@ -142,14 +144,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
         if (inMotion == false)
         {
-
-
-
-            //TODO Pool pieces that get removed by clear
-
-            //TODO animate new pieces to fall down in their place
-
-            //TODO disable touch while pieces are falling
 
 
             if (Mathf.Abs(eventData.delta.y) < 5)
