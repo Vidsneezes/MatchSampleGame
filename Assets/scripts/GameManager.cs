@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
+    //TODO clear pieces on board move
+
+
     public BoardPieceController piecePrefab;
     public List<BoardPieceController> activePieces;
     public List<BoardPieceController> inactivePieces;
@@ -124,5 +127,18 @@ public class GameManager : MonoBehaviour {
     public void RecalculateBoard(int x, int y, int dirx, int diry)
     {
         boardLogic.MovePiece(x, y, dirx, diry);
+    }
+
+    public void RemovePieces()
+    {
+
+    }
+
+    public void RemovePiece(BoardPieceController boardPieceController)
+    {
+        activePieces.Remove(boardPieceController);
+        boardPieceController.gameObject.SetActive(false);
+        boardPieceController.transform.SetParent(inactiveHolder);
+        inactivePieces.Add(boardPieceController);
     }
 }
