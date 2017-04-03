@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-    //TODO clear pieces on board move
+    //TODO clear pieces on board move clear
 
     //TODO animate new pieces to fall down in their place
 

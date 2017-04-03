@@ -113,6 +113,11 @@ public class BoardLogic {
         }
     }
 
+    public void ShiftPiecesDown()
+    {
+
+    }
+
     public bool CanMove(int orX, int orY, int dirX, int dirY)
     {
         int newPosX = orX + dirX;

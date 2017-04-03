@@ -285,7 +285,33 @@ public class BoardLogicTests {
         }
 
         Assert.AreEqual(false, hasNegative);
+    }
 
+    [Test]
+    public void ShiftsNegativePiecesUp()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
+        {
+            0,1,3,0,
+            1,0,-1,0,
+            -1,-1,-1,-1,
+            1,1,1,1
+        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, width, height);
 
+        int[] expectedBoard = new int[]
+        {
+            -1,-1,-1,-1,
+            0,1,-1,0,
+            1,0,3,0,
+            1,1,1,1
+        };
+
+        boardLogic.ShiftPiecesDown();
+
+        Assert.AreEqual(expectedBoard, boardLogic.GetBoard());
     }
 }
