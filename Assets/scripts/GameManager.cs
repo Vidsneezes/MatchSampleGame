@@ -21,10 +21,9 @@ public class GameManager : MonoBehaviour {
 
     //TODO animate new pieces to fall down in their place
 
-    //TODO Pool pieces that get removed by clear
-
     //TODO disable touch while pieces are falling
 
+    //TODO build up pipeline for move piece, clear pieces, shift pieces and bring down pieces
 
     public BoardPieceController piecePrefab;
     public List<BoardPieceController> activePieces;
@@ -133,6 +132,17 @@ public class GameManager : MonoBehaviour {
     public void RecalculateBoard(int x, int y, int dirx, int diry)
     {
         boardLogic.MovePiece(x, y, dirx, diry);
+    
+    }
+
+    public void ClearBoard(int x, int y)
+    {
+        int type = boardLogic.GetBoard()[x + y * boardLogic.boardWidth];
+        if (boardLogic.CanMove(x, y,0,0))
+        {
+            boardLogic.ClearConnectedType(type, x, y);
+            RemovePieces();
+        }
     }
 
     public void RemovePieces()
@@ -142,25 +152,29 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / boardLogic.boardWidth);
             int x = i - (y * boardLogic.boardWidth);
-            int bpc = -1;
-            for (int j = 0; j < activePieces.Count; j++)
+            if (board[i] == -1)
             {
-                if (activePieces[j].x == x && activePieces[j].y == y)
+                int bpc = -1;
+                for (int j = 0; j < activePieces.Count; j++)
                 {
-                    bpc = j;
-                    break;
+                    if (activePieces[j].x == x && activePieces[j].y == y)
+                    {
+                        bpc = j;
+                        break;
+                    }
                 }
-            }
-            if (bpc >= 0)
-            {
-                RemovePiece(activePieces[bpc]);
+                if (bpc >= 0)
+                {
+                    RemovePiece(bpc);
+                }
             }
         }
     }
 
-    public void RemovePiece(BoardPieceController boardPieceController)
+    public void RemovePiece(int bpc)
     {
-        activePieces.Remove(boardPieceController);
+        BoardPieceController boardPieceController = activePieces[bpc];
+        activePieces.RemoveAt(bpc);
         boardPieceController.gameObject.SetActive(false);
         boardPieceController.transform.SetParent(inactiveHolder);
         inactivePieces.Add(boardPieceController);

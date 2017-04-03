@@ -38,8 +38,8 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             x += moveDir;
         }
+        gameManager.ClearBoard(x, y);
         gameManager.canMove = true;
-
     }
 
     public void OnMotionDoneDummy()
