@@ -138,6 +138,24 @@ public class GameManager : MonoBehaviour {
         return boardLogic.CanMove(x, y, dirX, dirY);
     }
 
+    #region SHRINK PIECE DOWN
+    public void ShrinkPiece(int x, int y)
+    {
+        int indexN = 0;
+        for (int i = 0; i < activePieces.Count; i++)
+        {
+            if (activePieces[i].x == x && activePieces[i].y == y)
+            {
+                indexN = i;
+                break;
+            }
+        }
+        activePieces[indexN].ShrinkDown();
+        tweeningPiece.Add(activePieces[indexN]);
+    }
+    #endregion
+
+    #region PIECE MOVE LOGIC
     public void DoMove(int orgX, int orgY, int dirX, int dirY)
     {
         //Fill up the solution to check at end of board state
@@ -149,8 +167,8 @@ public class GameManager : MonoBehaviour {
         boardClearSolution.oldType = boardLogic.GetBoard()[boardClearSolution.destiX + boardClearSolution.destiY * width];
 
         //Animate pieces
-        Animate(orgX, orgY, dirX, dirY);
-        Animate(boardClearSolution.destiX, boardClearSolution.destiY, -dirX, -dirY);
+        AnimateMove(orgX, orgY, dirX, dirY);
+        AnimateMove(boardClearSolution.destiX, boardClearSolution.destiY, -dirX, -dirY);
 
         //Move to a tween friendly state
         boardState = "FIRST_PIECE_TWEEN";
@@ -160,13 +178,13 @@ public class GameManager : MonoBehaviour {
     {
         int destX = orgX + dirX;
         int destY = orgY + dirY;
-        AnimateFeint(orgX, orgY, dirX, dirY);
-        AnimateFeint(destX, destY, -dirX, -dirY);
+        AnimateFeintMove(orgX, orgY, dirX, dirY);
+        AnimateFeintMove(destX, destY, -dirX, -dirY);
         boardState = "FAKE_MOVE";
 
     }
 
-    public void Animate(int x, int y, float positionX, float positionY)
+    public void AnimateMove(int x, int y, float positionX, float positionY)
     {
         int indexN = 0;
         for (int i = 0; i < activePieces.Count; i++)
@@ -188,7 +206,7 @@ public class GameManager : MonoBehaviour {
         tweeningPiece.Add(activePieces[indexN]);
     }
 
-    public void AnimateFeint(int x, int y, float positionX, float positionY)
+    public void AnimateFeintMove(int x, int y, float positionX, float positionY)
     {
         int indexN = 0;
         for (int i = 0; i < activePieces.Count; i++)
@@ -209,6 +227,7 @@ public class GameManager : MonoBehaviour {
         }
         tweeningPiece.Add(activePieces[indexN]);
     }
+    #endregion
 
     public void PieceTweenDone(BoardPieceController bpc)
     {

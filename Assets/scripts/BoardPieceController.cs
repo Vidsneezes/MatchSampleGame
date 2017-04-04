@@ -32,14 +32,14 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         transform.DOScale(new Vector3(0,0,1),0.3f).OnComplete(OnShrinkDone);
     }
 
-    public void OnShrinkDone()
+    protected void OnShrinkDone()
     {
         gameManager.RemovePiece(this);
     }
     #endregion
 
     #region PLAYER INTERACTION TWEENS
-    public void OnMotionDone()
+    protected void OnMotionDone()
     {
         if(typeDir == 0)
         {
@@ -51,7 +51,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         gameManager.PieceTweenDone(this);
     }
 
-    public void OnMotionDoneDummy()
+    protected void OnMotionDoneDummy()
     {
         gameManager.canMove = true;
         gameManager.PieceTweenDone(this);
