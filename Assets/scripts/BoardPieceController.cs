@@ -19,7 +19,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        inMotion = false;
     }
 
     public void SetSprite(Sprite sprite)
@@ -29,7 +28,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     public void OnMotionDone()
     {
-        inMotion = false;
         if(typeDir == 0)
         {
             y += moveDir;
@@ -43,7 +41,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
 
     public void OnMotionDoneDummy()
     {
-        inMotion = false;
         gameManager.canMove = true;
       
     }
