@@ -120,7 +120,7 @@ public class BoardLogic {
         }
     }
 
-    public void ShiftPieceUp(int x, int y)
+    protected void ShiftPieceUp(int x, int y)
     {
         if(y-1 >= 0 && boardMatrix[x+y*boardWidth] == -1 && boardMatrix[x+(y-1)*boardWidth] >= 0)
         {

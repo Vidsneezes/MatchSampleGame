@@ -81,10 +81,12 @@ public class GameManager : MonoBehaviour {
                     boardState = "CLEAR_BOARD";
                 }break;
             case "CLEAR_BOARD":
+                boardLogic.MovePiece(boardClearSolution.orgX, boardClearSolution.orgY, boardClearSolution.dirX, boardClearSolution.dirY);
                 boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
                 int[] board = boardLogic.GetBoard();
+                Debug.Log("clear board");
                 for (int i = 0; i < board.Length; i++)
                 {
                     if(board[i] == -1)
@@ -172,6 +174,8 @@ public class GameManager : MonoBehaviour {
         boardClearSolution.orgY = orgY;
         boardClearSolution.destiX = orgX + dirX;
         boardClearSolution.destiY = orgY + dirY;
+        boardClearSolution.dirX = dirX;
+        boardClearSolution.dirY = dirY;
         boardClearSolution.orginType = boardLogic.GetBoard()[orgX + orgY * width];
         boardClearSolution.oldType = boardLogic.GetBoard()[boardClearSolution.destiX + boardClearSolution.destiY * width];
 
@@ -307,6 +311,8 @@ public struct BoardClearSolution
 {
     public int orgX;
     public int orgY;
+    public int dirX;
+    public int dirY;
     public int destiX;
     public int destiY;
     public int oldType;
