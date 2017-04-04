@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour {
                 boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
+
                 break;
             case "CLEAR_BOARD_TWEEN":if(tweeningPiece.Count == 0)
                 {
@@ -262,6 +263,15 @@ public class GameManager : MonoBehaviour {
         boardPieceController.gameObject.SetActive(false);
         boardPieceController.transform.SetParent(inactiveHolder);
         inactivePieces.Add(boardPieceController);
+    }
+
+    public void RemovePiece(BoardPieceController bpc)
+    {
+        activePieces.Remove(bpc);
+        bpc.gameObject.SetActive(false);
+        bpc.transform.SetParent(inactiveHolder);
+        inactivePieces.Add(bpc);
+        tweeningPiece.Remove(bpc);
     }
 }
 

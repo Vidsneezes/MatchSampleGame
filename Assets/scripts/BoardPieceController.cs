@@ -26,6 +26,19 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         spriteRenderer.sprite = sprite;
     }
 
+    #region CLEAR BOARD TWEENS
+    public void ShrinkDown()
+    {
+        transform.DOScale(new Vector3(0,0,1),0.3f).OnComplete(OnShrinkDone);
+    }
+
+    public void OnShrinkDone()
+    {
+        gameManager.RemovePiece(this);
+    }
+    #endregion
+
+    #region PLAYER INTERACTION TWEENS
     public void OnMotionDone()
     {
         if(typeDir == 0)
@@ -77,6 +90,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     {
         transform.DOLocalMoveY(value, 0.3f).SetRelative().SetLoops(2, LoopType.Yoyo).OnComplete(OnMotionDoneDummy);
     }
+    #endregion
 
     #region Inpute Logic
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
