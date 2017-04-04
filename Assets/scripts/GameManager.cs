@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour {
                     boardState = "CLEAR_BOARD";
                 }break;
             case "CLEAR_BOARD":
+                boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
+                boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
+                boardState = "CLEAR_BOARD_TWEEN";
                 break;
             case "CLEAR_BOARD_TWEEN":if(tweeningPiece.Count == 0)
                 {
@@ -136,7 +139,6 @@ public class GameManager : MonoBehaviour {
 
     public void DoMove(int orgX, int orgY, int dirX, int dirY)
     {
-
         //Fill up the solution to check at end of board state
         boardClearSolution.orgX = orgX;
         boardClearSolution.orgY = orgY;
