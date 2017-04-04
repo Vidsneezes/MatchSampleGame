@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour {
     public Transform inactiveHolder;
     public bool canMove;
     public string boardState;
+    public BoardClearSolution boardClearSolution;
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
     private List<BoardPieceController> tweeningPiece;
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour {
         int destY = orgY + dirY;
         Animate(orgX, orgY, dirX, dirY);
         Animate(destX, destY, -dirX, -dirY);
+        boardState = "FIRST_PIECE_TWEEN";
     }
 
     public void DoFakeMove(int orgX, int orgY, int dirX, int dirY)
@@ -147,6 +149,8 @@ public class GameManager : MonoBehaviour {
         int destY = orgY + dirY;
         AnimateFeint(orgX, orgY, dirX, dirY);
         AnimateFeint(destX, destY, -dirX, -dirY);
+        boardState = "FAKE_MOVE";
+
     }
 
     public void Animate(int x, int y, float positionX, float positionY)
@@ -247,4 +251,14 @@ public class GameManager : MonoBehaviour {
         boardPieceController.transform.SetParent(inactiveHolder);
         inactivePieces.Add(boardPieceController);
     }
+}
+
+public struct BoardClearSolution
+{
+    int orgX;
+    int orgY;
+    int destiX;
+    int destiY;
+    int oldType;
+    int orginType;
 }
