@@ -136,10 +136,20 @@ public class GameManager : MonoBehaviour {
 
     public void DoMove(int orgX, int orgY, int dirX, int dirY)
     {
-        int destX = orgX + dirX;
-        int destY = orgY + dirY;
+
+        //Fill up the solution to check at end of board state
+        boardClearSolution.orgX = orgX;
+        boardClearSolution.orgY = orgY;
+        boardClearSolution.destiX = orgX + dirX;
+        boardClearSolution.destiY = orgY + dirY;
+        boardClearSolution.orginType = boardLogic.GetBoard()[orgX + orgY * width];
+        boardClearSolution.oldType = boardLogic.GetBoard()[boardClearSolution.destiX + boardClearSolution.destiY * width];
+
+        //Animate pieces
         Animate(orgX, orgY, dirX, dirY);
-        Animate(destX, destY, -dirX, -dirY);
+        Animate(boardClearSolution.destiX, boardClearSolution.destiY, -dirX, -dirY);
+
+        //Move to a tween friendly state
         boardState = "FIRST_PIECE_TWEEN";
     }
 
@@ -255,10 +265,10 @@ public class GameManager : MonoBehaviour {
 
 public struct BoardClearSolution
 {
-    int orgX;
-    int orgY;
-    int destiX;
-    int destiY;
-    int oldType;
-    int orginType;
+    public int orgX;
+    public int orgY;
+    public int destiX;
+    public int destiY;
+    public int oldType;
+    public int orginType;
 }
