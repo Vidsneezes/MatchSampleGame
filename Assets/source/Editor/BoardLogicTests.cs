@@ -97,6 +97,77 @@ public class BoardLogicTests {
     }
 
     [Test]
+    public void TestFullPieceMoveToRefillCycle()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
+        {
+            0,0,0,0,
+            0,0,0,0,
+            2,1,1,1,
+            1,2,2,2
+        };
+        int[] moveExpectedBoard = new int[]
+        {
+            0,0,0,0,
+            0,0,0,0,
+            1,1,1,1,
+            2,2,2,2
+        };
+        int[] clearExpectedBoard = new int[]
+        {
+            0,0,0,0,
+            0,0,0,0,
+            -1,-1,-1,-1,
+            -1,-1,-1,-1
+        };
+
+        int[] shiftBoardExpected = new int[]
+        {
+            -1,-1,-1,-1,
+            -1,-1,-1,-1,
+            0,0,0,0,
+            0,0,0,0
+        };
+
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, width, height);
+        int orginX = 0;
+        int orginY = 2;
+        int dirX = 0;
+        int dirY = 1;
+        int orginType = boardLogic.GetBoard()[orginX + orginY * width];
+        bool canMove = boardLogic.CanMove(orginX, orginY, dirX, dirY);
+
+        Assert.AreEqual(true, canMove);
+        if (canMove)
+        {
+            int destinationX = orginX + dirX;
+            int destinationY = orginY + dirY;
+            int oldType = boardLogic.GetBoard()[destinationX + destinationY * width];
+            boardLogic.MovePiece(orginX, orginY, dirX, dirY);
+            Assert.AreEqual(moveExpectedBoard, boardLogic.GetBoard());
+            boardLogic.ClearConnectedType(oldType, orginX, orginY);
+            boardLogic.ClearConnectedType(orginType, destinationX, destinationY);
+            Assert.AreEqual(clearExpectedBoard, boardLogic.GetBoard());
+            boardLogic.ShiftPiecesDown();
+            Assert.AreEqual(shiftBoardExpected, boardLogic.GetBoard());
+            boardLogic.RefillBoard();
+            int[] board = boardLogic.GetBoard();
+            bool hasNegative = false;
+            for (int i = 0; i < board.Length; i++)
+            {
+                if (board[i] < 0)
+                {
+                    hasNegative = true;
+                }
+            }
+            Assert.AreEqual(false, hasNegative);
+        }
+    }
+
+    [Test]
     public void MovePiecesWithinBoard()
     {
         int width = 3;
