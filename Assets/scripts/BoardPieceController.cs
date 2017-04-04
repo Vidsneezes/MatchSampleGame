@@ -12,7 +12,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public SpriteRenderer spriteRenderer;
     public int x;
     public int y;
-    public bool inMotion;
     public GameManager gameManager;
     private int moveDir;
     private int typeDir;
@@ -142,81 +141,63 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             return;
         }
 
-        if (inMotion == false)
+
+
+        if (Mathf.Abs(eventData.delta.y) < 5)
         {
-
-
-            if (Mathf.Abs(eventData.delta.y) < 5)
+            if (eventData.delta.x > 0)
             {
-                if (eventData.delta.x > 0)
+                Debug.Log(x + " " + y);
+                if (gameManager.CanMove(x, y, 1, 0))
                 {
-                    Debug.Log(x + " " + y);
-                    if (gameManager.CanMove(x, y, 1, 0))
-                    {
-                        MoveX(gameManager.pieceWidth,true,1);
-                        gameManager.Animate(x+1,y, -gameManager.pieceWidth, 0);
-                    }
-                    else
-                    {
-                        FeintMoveX(gameManager.pieceWidth);
-                        gameManager.AnimateFeint(x + 1, y, -gameManager.pieceWidth, 0);
-                    }
-                    inMotion = true;
-                    gameManager.canMove = false;
+                    gameManager.DoMove(x, y, 1, 0);
                 }
-                else if (eventData.delta.x < 0)
+                else
                 {
-                    if (gameManager.CanMove(x, y, -1, 0))
-                    {
-                        MoveX(-gameManager.pieceWidth, true , -1);
-                        gameManager.Animate(x - 1, y, gameManager.pieceWidth, 0);
-                    }
-                    else
-                    {
-                        FeintMoveX(-gameManager.pieceWidth);
-                        gameManager.AnimateFeint(x - 1, y, gameManager.pieceWidth, 0);
-
-                    }
-                    inMotion = true;
-                    gameManager.canMove = false;
-
+                    gameManager.DoFakeMove(x, y, 1, 0);
                 }
+                gameManager.canMove = false;
             }
-            else
+            else if (eventData.delta.x < 0)
             {
-                if (eventData.delta.y > 0)
+                if (gameManager.CanMove(x, y, -1, 0))
                 {
-                    if (gameManager.CanMove(x, y, 0, 1))
-                    {
-                        MoveY(gameManager.pieceHeight, true, 1);
-                        gameManager.Animate(x, y + 1, 0, -gameManager.pieceHeight);
-                    }
-                    else
-                    {
-                        FeintMoveY(gameManager.pieceHeight);
-                        gameManager.AnimateFeint(x, y + 1, 0, -gameManager.pieceHeight);
-
-                    }
-                    inMotion = true;
-                    gameManager.canMove = false;
-
+                    gameManager.DoMove(x, y, -1, 0);
                 }
-                else if (eventData.delta.y < 0)
+                else
                 {
-                    if (gameManager.CanMove(x, y, 0, -1))
-                    {
-                        MoveY(-gameManager.pieceHeight,true,-1);
-                        gameManager.Animate(x, y - 1, 0, gameManager.pieceHeight);
-                    }
-                    else
-                    {
-                        FeintMoveY(-gameManager.pieceHeight);
-                        gameManager.AnimateFeint(x, y - 1, 0, gameManager.pieceHeight);
-                    }
-                    inMotion = true;
-                    gameManager.canMove = false;
-
+                    gameManager.DoFakeMove(x, y, -1, 0);
                 }
+                gameManager.canMove = false;
+            }
+        }
+        else
+        {
+            if (eventData.delta.y > 0)
+            {
+                if (gameManager.CanMove(x, y, 0, 1))
+                {
+                    gameManager.DoMove(x, y, 0, 1);
+                }
+                else
+                {
+                    gameManager.DoFakeMove(x, y, 0, 1);
+                }
+                gameManager.canMove = false;
+
+            }
+            else if (eventData.delta.y < 0)
+            {
+                if (gameManager.CanMove(x, y, 0, -1))
+                {
+                    gameManager.DoMove(x, y, 0, -1);
+                }
+                else
+                {
+                    gameManager.DoFakeMove(x, y, 0, -1);
+                }
+                gameManager.canMove = false;
+
             }
         }
     }
