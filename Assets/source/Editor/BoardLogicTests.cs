@@ -48,6 +48,55 @@ public class BoardLogicTests {
     }
 
     [Test]
+    public void BecomesNegativeOnMovePieceAndClear()
+    {
+        int width = 4;
+        int height = 4;
+        int[] boardConnection = new int[]
+        {
+            2,1,1,0,
+            1,2,0,0,
+            2,1,0,0,
+            2,1,0,0
+        };
+        int[] moveExpectedBoard = new int[]
+        {
+            2,1,1,0,
+            2,1,0,0,
+            2,1,0,0,
+            2,1,0,0
+        };
+        int[] clearExpectedBoard = new int[]
+        {
+            -1,-1,-1,0,
+            -1,-1,0,0,
+            -1,-1,0,0,
+            -1,-1,0,0
+        };
+        BoardLogic boardLogic = new BoardLogic(width, height);
+        boardLogic.SetBoard(boardConnection, width, height);
+        int orginX = 0;
+        int orginY = 1;
+        int dirX = 1;
+        int dirY = 0;
+        int orginType = boardLogic.GetBoard()[orginX + orginY * width];
+        bool canMove = boardLogic.CanMove(orginX, orginY, dirX, dirY);
+
+        Assert.AreEqual(true, canMove);
+        if (canMove)
+        {
+            int destinationX = orginX + dirX;
+            int destinationY = orginY + dirY;
+            int oldType = boardLogic.GetBoard()[destinationX + destinationY * width];
+            boardLogic.MovePiece(orginX, orginY, dirX, dirY);
+            Assert.AreEqual(moveExpectedBoard, boardLogic.GetBoard());
+            boardLogic.ClearConnectedType(oldType, orginX, orginY);
+            boardLogic.ClearConnectedType(orginType, destinationX, destinationY);
+        }
+        Assert.AreEqual(clearExpectedBoard, boardLogic.GetBoard());
+    }
+
+    [Test]
     public void MovePiecesWithinBoard()
     {
         int width = 3;
