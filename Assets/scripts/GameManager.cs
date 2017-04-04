@@ -84,7 +84,16 @@ public class GameManager : MonoBehaviour {
                 boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
-
+                int[] board = boardLogic.GetBoard();
+                for (int i = 0; i < board.Length; i++)
+                {
+                    if(board[i] == -1)
+                    {
+                        int y = Mathf.FloorToInt(i / width);
+                        int x = i - (y * width);
+                        ShrinkPiece(x, y);
+                    }
+                }
                 break;
             case "CLEAR_BOARD_TWEEN":if(tweeningPiece.Count == 0)
                 {
