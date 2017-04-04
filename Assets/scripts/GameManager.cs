@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
     public Transform pieceHolder;
     public Transform inactiveHolder;
     public bool canMove;
+    public string boardState;
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
     private List<BoardPieceController> tweeningPiece;
@@ -62,13 +63,47 @@ public class GameManager : MonoBehaviour {
         CreateFromBoard();
         canMove = true;
         tweeningPiece = new List<BoardPieceController>();
+        boardState = "INITIAL";
     }
 
     private void Update()
     {
-        if(tweeningPiece.Count == 0)
+        switch (boardState)
         {
-            canMove = true;
+            case "INITIAL":  canMove = true;break;
+            case "FAKE_MOVE": if(tweeningPiece.Count == 0)
+                {
+                    boardState = "INITIAL";
+                }break;
+            case "FIRST_PIECE_TWEEN": if(tweeningPiece.Count == 0)
+                {
+                    boardState = "CLEAR_BOARD";
+                }break;
+            case "CLEAR_BOARD":
+                break;
+            case "CLEAR_BOARD_TWEEN":if(tweeningPiece.Count == 0)
+                {
+                    boardState = "SHIFT_DOWN";
+                }break;
+            case "SHIFT_DOWN":
+                boardLogic.ShiftPiecesDown();
+                boardState = "SHIFT_DOWN_TWEEN";
+                break;
+            case "SHIFT_DOWN_TWEEN":if(tweeningPiece.Count == 0)
+                {
+                    boardState = "FILL_BOARD";
+                }break;
+            case "FILL_BOARD":
+                boardLogic.FillBoardWithCells();
+                boardState = "ENTER_DROPDOWN_ANIMATION";
+                break;
+            case "ENTER_DROPDOWN_ANIMATION":
+                break;
+            case "STAY_DROPDOWN_ANIMATION": if(tweeningPiece.Count == 0)
+                {
+                    boardState = "INITIAL";
+                }break;
+
         }
     }
 
