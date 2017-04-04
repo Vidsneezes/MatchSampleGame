@@ -35,11 +35,13 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             x += moveDir;
         }
+        gameManager.PieceTweenDone(this);
     }
 
     public void OnMotionDoneDummy()
     {
         gameManager.canMove = true;
+        gameManager.PieceTweenDone(this);
     }
 
     public void MoveX(float value, int dirx = 0)

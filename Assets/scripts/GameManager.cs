@@ -64,6 +64,14 @@ public class GameManager : MonoBehaviour {
         tweeningPiece = new List<BoardPieceController>();
     }
 
+    private void Update()
+    {
+        if(tweeningPiece.Count == 0)
+        {
+            canMove = true;
+        }
+    }
+
     private void CreateFromBoard()
     {
         int[] board = boardLogic.GetBoard();
@@ -88,26 +96,6 @@ public class GameManager : MonoBehaviour {
     public bool CanMove(int x, int y, int dirX, int dirY)
     {
         return boardLogic.CanMove(x, y, dirX, dirY);
-    }
-
-    public void AnimateFeint(int x, int y, float positionX, float positionY)
-    {
-        int indexN = 0;
-        for (int i = 0; i < activePieces.Count; i++)
-        {
-            if(activePieces[i].x == x && activePieces[i].y == y)
-            {
-                indexN = i;
-                break;
-            }
-        }
-        if (Mathf.Abs(positionX) > 0)
-        {
-            activePieces[indexN].FeintMoveX(positionX);
-        }else if(Mathf.Abs(positionY) > 0)
-        {
-            activePieces[indexN].FeintMoveY(positionY);
-        }
     }
 
     public void DoMove(int orgX, int orgY, int dirX, int dirY)
@@ -144,6 +132,28 @@ public class GameManager : MonoBehaviour {
         else if (Mathf.Abs(positionY) > 0)
         {
             activePieces[indexN].MoveY(positionY*pieceHeight,(int)Mathf.Sign(positionY));
+        }
+        tweeningPiece.Add(activePieces[indexN]);
+    }
+
+    public void AnimateFeint(int x, int y, float positionX, float positionY)
+    {
+        int indexN = 0;
+        for (int i = 0; i < activePieces.Count; i++)
+        {
+            if (activePieces[i].x == x && activePieces[i].y == y)
+            {
+                indexN = i;
+                break;
+            }
+        }
+        if (Mathf.Abs(positionX) > 0)
+        {
+            activePieces[indexN].FeintMoveX(positionX*pieceWidth);
+        }
+        else if (Mathf.Abs(positionY) > 0)
+        {
+            activePieces[indexN].FeintMoveY(positionY*pieceHeight);
         }
         tweeningPiece.Add(activePieces[indexN]);
     }
