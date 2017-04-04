@@ -35,25 +35,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             x += moveDir;
         }
-        gameManager.ClearBoard(x, y);
-        gameManager.canMove = true;
     }
 
     public void OnMotionDoneDummy()
     {
         gameManager.canMove = true;
-      
-    }
-
-    public void MoveX(float value, bool recalc = false, int dir = 0)
-    {
-        MoveX(value);
-        if (recalc)
-        {
-            typeDir = 1;
-            moveDir = dir;
-            gameManager.RecalculateBoard(x, y, dir, 0);
-        }
     }
 
     public void MoveX(float value, int dirx = 0)
@@ -66,18 +52,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public void MoveX(float value)
     {
         transform.DOLocalMoveX(value, 0.3f).SetRelative().OnComplete(OnMotionDone);
-    }
-
-    public void MoveY(float value, bool recalc = false, int dir = 0)
-    {
-        MoveY(value);
-        if (recalc)
-        {
-
-            typeDir = 0;
-            moveDir = dir;
-            gameManager.RecalculateBoard(x, y, 0, dir);
-        }
     }
 
     public void MoveY(float value, int diry = 0)
@@ -137,8 +111,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             return;
         }
-
-
 
         if (Mathf.Abs(eventData.delta.y) < 5)
         {
