@@ -108,6 +108,22 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void DoMove(int orgX, int orgY, int dirX, int dirY)
+    {
+        int destX = orgX + dirX;
+        int destY = orgY + dirY;
+        Animate(orgX, orgY, dirX, dirY);
+        Animate(destX, destY, -dirX, -dirY);
+    }
+
+    public void DoFakeMove(int orgX, int orgY, int dirX, int dirY)
+    {
+        int destX = orgX + dirX;
+        int destY = orgY + dirY;
+        AnimateFeint(orgX, orgY, dirX, dirY);
+        AnimateFeint(destX, destY, -dirX, -dirY);
+    }
+
     public void Animate(int x, int y, float positionX, float positionY)
     {
         int indexN = 0;
