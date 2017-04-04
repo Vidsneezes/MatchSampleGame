@@ -17,13 +17,17 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-    //TODO clear pieces on board move clear
+    //TODO clear pieces on board move clear and make sure they have atleast two connections
 
     //TODO animate new pieces to fall down in their place
 
     //TODO disable touch while pieces are falling
 
-    //TODO build up pipeline for move piece, clear pieces, shift pieces and bring down pieces
+    //TODO Implemente remaining states in reducer
+
+    //TODO create shift down methods
+
+
 
     public BoardPieceController piecePrefab;
     public List<BoardPieceController> activePieces;
@@ -86,7 +90,6 @@ public class GameManager : MonoBehaviour {
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
                 int[] board = boardLogic.GetBoard();
-                Debug.Log("clear board");
                 for (int i = 0; i < board.Length; i++)
                 {
                     if(board[i] == -1)

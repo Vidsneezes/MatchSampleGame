@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
-    //TODO add functions to animate falling into place
+    //TODO add shfit down tweens
 
     public SpriteRenderer spriteRenderer;
     public int x;
