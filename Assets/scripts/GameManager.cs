@@ -325,7 +325,7 @@ public class GameManager : MonoBehaviour {
     public void ShiftPiecesDown()
     {
         int[] boardMatrix = boardLogic.GetBoard();
-        for (int i = 0; i < boardMatrix.Length; i++)
+        for (int i = boardMatrix.Length - 1; i >= 0; i--)
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
@@ -348,12 +348,13 @@ public class GameManager : MonoBehaviour {
 
     private void ShiftPieceDown(int[] boardMatrix, int x, int y, ref BoardPieceMeta bpm)
     {
+
         if (y + 1 < height && boardMatrix[x + y * width] >= 0 && boardMatrix[x + (y + 1) * width] == -1)
         {
             bpm.shiftDown = true;
-            int val = boardMatrix[x + (y - 1) * width];
-            boardMatrix[x + y * width] = val;
-            boardMatrix[x + (y - 1) * width] = -1;
+            int val = boardMatrix[x + (y) * width];
+            boardMatrix[x + y * width] = -1;
+            boardMatrix[x + (y + 1) * width] = val;
             ShiftPieceDown(boardMatrix, x, y - 1, ref bpm);
         }
         else
