@@ -37,6 +37,14 @@ public class GameManager : MonoBehaviour {
     public int height;
     public float pieceWidth;
     public float pieceHeight;
+
+    public float InvertedHeight
+    {
+        get
+        {
+            return -pieceHeight;
+        }
+    }
     public float horizontalOffset;
     public float verticalOffset;
     public Transform pieceHolder;
@@ -147,7 +155,7 @@ public class GameManager : MonoBehaviour {
             newPiece.gameManager = this;
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
-            newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*-pieceHeight,0);
+            newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*InvertedHeight,0);
             activePieces.Add(newPiece);
         }
     }
@@ -222,7 +230,7 @@ public class GameManager : MonoBehaviour {
         }
         else if (Mathf.Abs(positionY) > 0)
         {
-            activePieces[indexN].MoveY(positionY*pieceHeight,(int)Mathf.Sign(positionY));
+            activePieces[indexN].MoveY(positionY*InvertedHeight,(int)Mathf.Sign(positionY));
         }
         tweeningPiece.Add(activePieces[indexN]);
     }
@@ -244,7 +252,7 @@ public class GameManager : MonoBehaviour {
         }
         else if (Mathf.Abs(positionY) > 0)
         {
-            activePieces[indexN].FeintMoveY(positionY*pieceHeight);
+            activePieces[indexN].FeintMoveY(positionY*InvertedHeight);
         }
         tweeningPiece.Add(activePieces[indexN]);
     }
@@ -351,7 +359,7 @@ public class GameManager : MonoBehaviour {
                     activePieces[indexPiece].boardPieceMeta.newY = nY;
                     activePieces[indexPiece].boardPieceMeta.shiftDown = true;
                     tweeningPiece.Add(activePieces[indexPiece]);
-                    activePieces[indexPiece].PromptShiftDownTween();
+                    activePieces[indexPiece].PromptShiftDownTween(InvertedHeight);
                 }
             }
         }

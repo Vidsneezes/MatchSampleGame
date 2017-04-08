@@ -40,9 +40,9 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     #endregion
 
     #region SHIFT_DOWN
-    public void PromptShiftDownTween()
+    public void PromptShiftDownTween(float value)
     {
-        transform.DOLocalMoveY(boardPieceMeta.newY - y, 0.2f).SetRelative().OnComplete(OnShiftDone);
+        transform.DOLocalMoveY((boardPieceMeta.newY - y)*value, 0.2f).SetRelative().OnComplete(OnShiftDone);
     }
 
     private void OnShiftDone()
@@ -176,19 +176,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             if (eventData.delta.y > 0)
             {
-                if (gameManager.CanMove(x, y, 0, 1))
-                {
-                    gameManager.DoMove(x, y, 0, 1);
-                }
-                else
-                {
-                    gameManager.DoFakeMove(x, y, 0, 1);
-                }
-                gameManager.canMove = false;
-
-            }
-            else if (eventData.delta.y < 0)
-            {
                 if (gameManager.CanMove(x, y, 0, -1))
                 {
                     gameManager.DoMove(x, y, 0, -1);
@@ -196,6 +183,19 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                 else
                 {
                     gameManager.DoFakeMove(x, y, 0, -1);
+                }
+                gameManager.canMove = false;
+
+            }
+            else if (eventData.delta.y < 0)
+            {
+                if (gameManager.CanMove(x, y, 0, 1))
+                {
+                    gameManager.DoMove(x, y, 0, 1);
+                }
+                else
+                {
+                    gameManager.DoFakeMove(x, y, 0, 1);
                 }
                 gameManager.canMove = false;
 
