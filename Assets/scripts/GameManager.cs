@@ -347,6 +347,8 @@ public class GameManager : MonoBehaviour {
                     activePieces[indexPiece].boardPieceMeta.newX = nX;
                     activePieces[indexPiece].boardPieceMeta.newY = nY;
                     activePieces[indexPiece].boardPieceMeta.shiftDown = true;
+                    tweeningPiece.Add(activePieces[indexPiece]);
+                    activePieces[indexPiece].PromptShiftDownTween();
                 }
             }
         }

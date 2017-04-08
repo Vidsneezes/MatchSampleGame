@@ -45,9 +45,12 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         transform.DOLocalMoveY(boardPieceMeta.newY - y, 0.2f).SetRelative().OnComplete(OnShiftDone);
     }
 
-    public void OnShiftDone()
+    private void OnShiftDone()
     {
-
+        boardPieceMeta.shiftDown = false;
+        x = boardPieceMeta.newX;
+        y = boardPieceMeta.newY;
+        gameManager.PieceTweenDone(this);
     }
     #endregion
 
