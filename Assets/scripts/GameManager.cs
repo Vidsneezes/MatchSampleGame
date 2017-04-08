@@ -329,18 +329,28 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
-            ShiftPieceDown(boardMatrix, x, y);
+            BoardPieceMeta bpm = new BoardPieceMeta();
+            bpm.newX = 0;
+            bpm.newY = 0;
+            bpm.shiftDown = false;
+            ShiftPieceDown(boardMatrix, x, y, ref bpm);
         }
     }
 
-    protected void ShiftPieceDown(int[] boardMatrix, int x, int y)
+    protected void ShiftPieceDown(int[] boardMatrix, int x, int y, ref BoardPieceMeta bpm)
     {
-        if (y - 1 >= 0 && boardMatrix[x + y * width] == -1 && boardMatrix[x + (y - 1) * width] >= 0)
+        if (y + 1 < height && boardMatrix[x + y * width] >= 0 && boardMatrix[x + (y + 1) * width] == -1)
         {
+            bpm.shiftDown = true;
             int val = boardMatrix[x + (y - 1) * width];
             boardMatrix[x + y * width] = val;
             boardMatrix[x + (y - 1) * width] = -1;
-            ShiftPieceDown(boardMatrix, x, y - 1);
+            ShiftPieceDown(boardMatrix, x, y - 1, ref bpm);
+        }
+        if(bpm.shiftDown == true)
+        {
+            bpm.newX = x;
+            bpm.newY = y;
         }
     }
 
