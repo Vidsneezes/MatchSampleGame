@@ -208,4 +208,21 @@ public class BoardLogic {
     {
         boardMatrix[x + _boardWidth * y] = value;
     }
+
+    public void PrintBoard()
+    {
+        string boardDisplay = "";
+        for (int i = 0; i < boardMatrix.Length; i++)
+        {
+            int y = Mathf.FloorToInt(i / boardWidth);
+            int x = i - (y * boardWidth);
+            int pieceType = boardMatrix[i];
+            boardDisplay += pieceType;
+            if(y >= boardWidth-1)
+            {
+                boardDisplay += "\n";
+            }
+        }
+        Debug.Log(boardDisplay);
+    }
 }

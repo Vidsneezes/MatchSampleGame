@@ -274,8 +274,8 @@ public class GameManager : MonoBehaviour {
         int[] board = boardLogic.GetBoard();
         for (int i = 0; i < board.Length; i++)
         {
-            int y = Mathf.FloorToInt(i / boardLogic.boardWidth);
-            int x = i - (y * boardLogic.boardWidth);
+            int y = Mathf.FloorToInt(i / width);
+            int x = i - (y * width);
             if (board[i] == -1)
             {
                 int bpc = -1;
@@ -316,11 +316,11 @@ public class GameManager : MonoBehaviour {
     public void AllotPiecesToShift()
     {
         int[] board = boardLogic.GetBoard();
-
+        boardLogic.PrintBoard();
         for (int i = 0; i < board.Length; i++)
         {
-            int y = Mathf.FloorToInt(i / boardLogic.boardWidth);
-            int x = i - (y * boardLogic.boardWidth);
+            int y = Mathf.FloorToInt(i / width);
+            int x = i - (y * width);
             if(board[i] == -1)
             {
                 int indexPiece = GetActivePieceIndex(x, y);
