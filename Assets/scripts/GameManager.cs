@@ -329,18 +329,18 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
-            ShiftPieceUp(boardMatrix, x, y);
+            ShiftPieceDown(boardMatrix, x, y);
         }
     }
 
-    protected void ShiftPieceUp(int[] boardMatrix, int x, int y)
+    protected void ShiftPieceDown(int[] boardMatrix, int x, int y)
     {
         if (y - 1 >= 0 && boardMatrix[x + y * width] == -1 && boardMatrix[x + (y - 1) * width] >= 0)
         {
             int val = boardMatrix[x + (y - 1) * width];
             boardMatrix[x + y * width] = val;
             boardMatrix[x + (y - 1) * width] = -1;
-            ShiftPieceUp(boardMatrix, x, y - 1);
+            ShiftPieceDown(boardMatrix, x, y - 1);
         }
     }
 
