@@ -408,7 +408,7 @@ public class BoardLogicTests {
     }
 
     [Test]
-    public void ShiftsNegativePiecesUp()
+    public void ShiftPiecesBelowNegative()
     {
         int width = 4;
         int height = 4;
