@@ -116,8 +116,8 @@ public class GameManager : MonoBehaviour {
                     boardState = "SHIFT_DOWN";
                 }break;
             case "SHIFT_DOWN":
+                ShiftPiecesDown();
                 boardLogic.ShiftPiecesDown();
-                AllotPiecesToShift();
                 boardState = "SHIFT_DOWN_TWEEN";
                 break;
             case "SHIFT_DOWN_TWEEN":if(tweeningPiece.Count == 0)
@@ -320,6 +320,51 @@ public class GameManager : MonoBehaviour {
         bpc.transform.SetParent(inactiveHolder);
         inactivePieces.Add(bpc);
         tweeningPiece.Remove(bpc);
+    }
+
+    public void ShiftPiecesDown()
+    {
+        int[] boardMatrix = boardLogic.GetBoard();
+        for (int i = boardMatrix.Length - 1; i >= 0; i--)
+        {
+            int y = Mathf.FloorToInt(i / width);
+            int x = i - (y * width);
+            BoardPieceMeta bpm = new BoardPieceMeta()
+            {
+                newX = 0,
+                newY = 0,
+                shiftDown = false
+            };
+            ShiftPieceDown(boardMatrix, x, y, ref bpm);
+            if(bpm.shiftDown == true)
+            {
+                int indexPiece = GetActivePieceIndex(x, y);
+                activePieces[indexPiece].boardPieceMeta = bpm;
+                tweeningPiece.Add(activePieces[indexPiece]);
+                activePieces[indexPiece].PromptShiftDownTween(InvertedHeight);
+            }
+        }
+    }
+
+    private void ShiftPieceDown(int[] boardMatrix, int x, int y, ref BoardPieceMeta bpm)
+    {
+
+        if (y + 1 < height && boardMatrix[x + y * width] >= 0 && boardMatrix[x + (y + 1) * width] == -1)
+        {
+            bpm.shiftDown = true;
+            int val = boardMatrix[x + (y) * width];
+            boardMatrix[x + y * width] = -1;
+            boardMatrix[x + (y + 1) * width] = val;
+            ShiftPieceDown(boardMatrix, x, y + 1, ref bpm);
+        }
+        else
+        {
+            if (bpm.shiftDown == true)
+            {
+                bpm.newX = x;
+                bpm.newY = y;
+            }
+        }
     }
 
     public void AllotPiecesToShift()

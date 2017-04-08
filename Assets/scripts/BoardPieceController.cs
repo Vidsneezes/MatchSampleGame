@@ -198,7 +198,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
                     gameManager.DoFakeMove(x, y, 0, 1);
                 }
                 gameManager.canMove = false;
-
             }
         }
     }
