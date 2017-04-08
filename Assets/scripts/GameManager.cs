@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour {
     private void CreateFromBoard()
     {
         int[] board = boardLogic.GetBoard();
+        boardLogic.PrintBoard();
         for (int i = 0; i < board.Length; i++)
         {
             int y = Mathf.FloorToInt(i / width);
