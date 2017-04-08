@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
+    //TODO bug wrong shift logic
 
     //TODO animate new pieces to fall down in their place
 
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour {
                 }break;
             case "SHIFT_DOWN":
                 boardLogic.ShiftPiecesDown();
+                AllotPiecesToShift();
                 boardState = "SHIFT_DOWN_TWEEN";
                 break;
             case "SHIFT_DOWN_TWEEN":if(tweeningPiece.Count == 0)
