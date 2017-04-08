@@ -13,6 +13,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     public int x;
     public int y;
     public GameManager gameManager;
+    public BoardPieceMeta boardPieceMeta;
     private int moveDir;
     private int typeDir;
 
@@ -187,4 +188,11 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         }
     }
     #endregion
+}
+
+public struct BoardPieceMeta
+{
+    public int newX;
+    public int newY;
+    public bool shiftDown;
 }
