@@ -86,7 +86,10 @@ public class GameManager : MonoBehaviour {
                 }break;
             case "CLEAR_BOARD":
                 boardLogic.MovePiece(boardClearSolution.orgX, boardClearSolution.orgY, boardClearSolution.dirX, boardClearSolution.dirY);
-                boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
+                if (boardLogic.CanMove(boardClearSolution.orgX, boardClearSolution.orgY, 0, 0))
+                {
+                    boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
+                }
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
                 int[] board = boardLogic.GetBoard();
