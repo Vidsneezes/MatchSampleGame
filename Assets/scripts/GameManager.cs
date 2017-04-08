@@ -310,6 +310,38 @@ public class GameManager : MonoBehaviour {
         inactivePieces.Add(bpc);
         tweeningPiece.Remove(bpc);
     }
+
+    public void AllotPiecesToShift()
+    {
+        int[] board = boardLogic.GetBoard();
+
+        for (int i = 0; i < board.Length; i++)
+        {
+            int y = Mathf.FloorToInt(i / boardLogic.boardWidth);
+            int x = i - (y * boardLogic.boardWidth);
+            if(board[i] == -1)
+            {
+                int indexPiece = GetActivePieceIndex(x, y);
+                if(indexPiece != -1)
+                {
+
+                }
+               
+            }
+        }
+    }
+
+    public int GetActivePieceIndex(int x,int y)
+    {
+        for (int i = 0; i < activePieces.Count; i++)
+        {
+            if (activePieces[i].x == x && activePieces[i].y == y)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
 public struct BoardClearSolution
