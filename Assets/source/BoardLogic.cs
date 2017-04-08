@@ -116,18 +116,18 @@ public class BoardLogic {
         {
             int y = Mathf.FloorToInt(i / boardWidth);
             int x = i - (y * boardWidth);
-            ShiftPieceUp(x, y);
+            ShiftPieceDown(x, y);
         }
     }
 
-    protected void ShiftPieceUp(int x, int y)
+    protected void ShiftPieceDown(int x, int y)
     {
-        if(y-1 >= 0 && boardMatrix[x+y*boardWidth] == -1 && boardMatrix[x+(y-1)*boardWidth] >= 0)
+        if(y+1 < boardHeight && boardMatrix[x+y*boardWidth] >= 0 && boardMatrix[x+(y+1)*boardWidth] == -1)
         {
-            int val = boardMatrix[x + (y - 1) * boardWidth];
+            int val = boardMatrix[x + (y + 1) * boardWidth];
             boardMatrix[x + y * boardWidth] = val;
-            boardMatrix[x + (y-1) * boardWidth] = -1;
-            ShiftPieceUp(x, y - 1);
+            boardMatrix[x + (y+1) * boardWidth] = -1;
+            ShiftPieceDown(x, y + 1);
         }
     }
 

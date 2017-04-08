@@ -116,8 +116,8 @@ public class GameManager : MonoBehaviour {
                     boardState = "SHIFT_DOWN";
                 }break;
             case "SHIFT_DOWN":
+                ShiftPiecesDown();
                 boardLogic.ShiftPiecesDown();
-                AllotPiecesToShift();
                 boardState = "SHIFT_DOWN_TWEEN";
                 break;
             case "SHIFT_DOWN_TWEEN":if(tweeningPiece.Count == 0)
