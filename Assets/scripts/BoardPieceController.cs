@@ -39,6 +39,18 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     }
     #endregion
 
+    #region SHIFT_DOWN
+    public void PromptShiftDownTween()
+    {
+        transform.DOLocalMoveY(boardPieceMeta.newY - y, 0.2f).SetRelative().OnComplete(OnShiftDone);
+    }
+
+    public void OnShiftDone()
+    {
+
+    }
+    #endregion
+
     #region PLAYER INTERACTION TWEENS
     protected void OnMotionDone()
     {
