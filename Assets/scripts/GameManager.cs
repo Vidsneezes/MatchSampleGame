@@ -355,7 +355,7 @@ public class GameManager : MonoBehaviour {
             int val = boardMatrix[x + (y) * width];
             boardMatrix[x + y * width] = -1;
             boardMatrix[x + (y + 1) * width] = val;
-            ShiftPieceDown(boardMatrix, x, y - 1, ref bpm);
+            ShiftPieceDown(boardMatrix, x, y + 1, ref bpm);
         }
         else
         {
