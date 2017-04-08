@@ -7,7 +7,6 @@ using DG.Tweening;
 
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
-    //TODO add shfit down tweens
 
     public SpriteRenderer spriteRenderer;
     public int x;

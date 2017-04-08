@@ -17,15 +17,16 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-    //TODO bug wrong shift logic
+    
 
-    //TODO animate new pieces to fall down in their place
 
     //TODO disable touch while pieces are falling
 
     //TODO Implemente remaining states in reducer
 
-    //TODO create shift down methods
+    //TODO restore state after shift down
+
+    //TODO implement refill of board
 
 
 
