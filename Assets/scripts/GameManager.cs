@@ -324,9 +324,30 @@ public class GameManager : MonoBehaviour {
                 int indexPiece = GetActivePieceIndex(x, y);
                 if(indexPiece != -1)
                 {
-
+                    int nX = x;
+                    int nY = y + 1;
+                    for (int m = 0; m < height; m++)
+                    {
+                        if(nY < height)
+                        {
+                            if(board[nX+nY*width] != -1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                nY += 1;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    activePieces[indexPiece].boardPieceMeta.newX = nX;
+                    activePieces[indexPiece].boardPieceMeta.newY = nY;
+                    activePieces[indexPiece].boardPieceMeta.shiftDown = true;
                 }
-               
             }
         }
     }
