@@ -329,15 +329,24 @@ public class GameManager : MonoBehaviour {
         {
             int y = Mathf.FloorToInt(i / width);
             int x = i - (y * width);
-            BoardPieceMeta bpm = new BoardPieceMeta();
-            bpm.newX = 0;
-            bpm.newY = 0;
-            bpm.shiftDown = false;
+            BoardPieceMeta bpm = new BoardPieceMeta()
+            {
+                newX = 0,
+                newY = 0,
+                shiftDown = false
+            };
             ShiftPieceDown(boardMatrix, x, y, ref bpm);
+            if(bpm.shiftDown == true)
+            {
+                int indexPiece = GetActivePieceIndex(x, y);
+                activePieces[indexPiece].boardPieceMeta = bpm;
+                tweeningPiece.Add(activePieces[indexPiece]);
+                activePieces[indexPiece].PromptShiftDownTween(InvertedHeight);
+            }
         }
     }
 
-    protected void ShiftPieceDown(int[] boardMatrix, int x, int y, ref BoardPieceMeta bpm)
+    private void ShiftPieceDown(int[] boardMatrix, int x, int y, ref BoardPieceMeta bpm)
     {
         if (y + 1 < height && boardMatrix[x + y * width] >= 0 && boardMatrix[x + (y + 1) * width] == -1)
         {
@@ -347,10 +356,13 @@ public class GameManager : MonoBehaviour {
             boardMatrix[x + (y - 1) * width] = -1;
             ShiftPieceDown(boardMatrix, x, y - 1, ref bpm);
         }
-        if(bpm.shiftDown == true)
+        else
         {
-            bpm.newX = x;
-            bpm.newY = y;
+            if (bpm.shiftDown == true)
+            {
+                bpm.newX = x;
+                bpm.newY = y;
+            }
         }
     }
 
