@@ -457,7 +457,7 @@ PlayerSettings:
     Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   cloudProjectId: 923e00f9-d1fe-4484-9e22-c4cd59e69263
   projectName: Match3TestGame
   organizationId: moraleszez

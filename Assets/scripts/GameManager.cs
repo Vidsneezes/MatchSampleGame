@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour {
             newPiece.gameManager = this;
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
-            newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*pieceHeight,0);
+            newPiece.transform.localPosition = new Vector3(x*pieceWidth, y*-pieceHeight,0);
             activePieces.Add(newPiece);
         }
     }
