@@ -126,7 +126,6 @@ public class GameManager : MonoBehaviour {
                     boardState = "FILL_BOARD";
                 }break;
             case "FILL_BOARD":
-                boardLogic.FillBoardWithCells();
                 boardState = "ENTER_DROPDOWN_ANIMATION";
                 break;
             case "ENTER_DROPDOWN_ANIMATION":
@@ -259,6 +258,7 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
+    #region CLEAN_UP_LOGIC
     public void PieceTweenDone(BoardPieceController bpc)
     {
         tweeningPiece.Remove(bpc);
@@ -322,7 +322,9 @@ public class GameManager : MonoBehaviour {
         inactivePieces.Add(bpc);
         tweeningPiece.Remove(bpc);
     }
+    #endregion
 
+    #region SHIFT LOGIC
     public void ShiftPiecesDown()
     {
         int[] boardMatrix = boardLogic.GetBoard();
@@ -366,6 +368,44 @@ public class GameManager : MonoBehaviour {
                 bpm.newY = y;
             }
         }
+    }
+    #endregion
+
+    public void RefillBoard()
+    {
+        List<int> positionsToRefil = new List<int>();
+
+        int[] board = boardLogic.GetBoard();
+
+        for (int i = 0; i < board.Length; i++)
+        {
+            if(board[i] == -1)
+            {
+                positionsToRefil.Add(i);
+            }
+        }
+
+        boardLogic.RefillBoard();
+
+        for (int v = 0; v < positionsToRefil.Count; v++)
+        {
+            int i = positionsToRefil[v];
+
+            int y = Mathf.FloorToInt(i / width);
+            int x = i - (y * width);
+            int pieceType = board[i];
+            BoardPieceController newPiece = inactivePieces[0];
+            inactivePieces.RemoveAt(0);
+            newPiece.transform.SetParent(pieceHolder);
+            newPiece.x = x;
+            newPiece.y = y;
+            newPiece.gameManager = this;
+            newPiece.SetSprite(pieceSprite[pieceType]);
+            newPiece.gameObject.SetActive(true);
+            newPiece.transform.localPosition = new Vector3(x * pieceWidth, y * InvertedHeight, 0);
+            activePieces.Add(newPiece);
+        }
+      
     }
 
     public int GetActivePieceIndex(int x,int y)
