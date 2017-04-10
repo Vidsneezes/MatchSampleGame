@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour {
                     boardState = "FILL_BOARD";
                 }break;
             case "FILL_BOARD":
+                RefillBoard();
                 boardState = "ENTER_DROPDOWN_ANIMATION";
                 break;
             case "ENTER_DROPDOWN_ANIMATION":
