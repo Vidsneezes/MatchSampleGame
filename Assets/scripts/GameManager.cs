@@ -368,49 +368,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void AllotPiecesToShift()
-    {
-        int[] board = boardLogic.GetBoard();
-        boardLogic.PrintBoard();
-        for (int i = 0; i < board.Length; i++)
-        {
-            int y = Mathf.FloorToInt(i / width);
-            int x = i - (y * width);
-            if(board[i] == -1)
-            {
-                int indexPiece = GetActivePieceIndex(x, y);
-                if(indexPiece != -1)
-                {
-                    int nX = x;
-                    int nY = y + 1;
-                    for (int m = 0; m < height; m++)
-                    {
-                        if(nY < height)
-                        {
-                            if(board[nX+nY*width] != -1)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                nY += 1;
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    activePieces[indexPiece].boardPieceMeta.newX = nX;
-                    activePieces[indexPiece].boardPieceMeta.newY = nY;
-                    activePieces[indexPiece].boardPieceMeta.shiftDown = true;
-                    tweeningPiece.Add(activePieces[indexPiece]);
-                    activePieces[indexPiece].PromptShiftDownTween(InvertedHeight);
-                }
-            }
-        }
-    }
-
     public int GetActivePieceIndex(int x,int y)
     {
         for (int i = 0; i < activePieces.Count; i++)
