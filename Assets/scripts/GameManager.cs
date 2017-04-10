@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour {
 
     //TODO Implemente remaining states in reducer
 
-    //TODO restore state after shift down
+    //TODO restore state after done with drop down
 
-    //TODO implement refill of board
+    //TODO add drop down animate
 
 
 
@@ -82,17 +82,26 @@ public class GameManager : MonoBehaviour {
 
     private void Update()
     {
+        StateReducer();
+    }
+
+    private void StateReducer()
+    {
         switch (boardState)
         {
-            case "INITIAL":  canMove = true;break;
-            case "FAKE_MOVE": if(tweeningPiece.Count == 0)
+            case "INITIAL": canMove = true; break;
+            case "FAKE_MOVE":
+                if (tweeningPiece.Count == 0)
                 {
                     boardState = "INITIAL";
-                }break;
-            case "FIRST_PIECE_TWEEN": if(tweeningPiece.Count == 0)
+                }
+                break;
+            case "FIRST_PIECE_TWEEN":
+                if (tweeningPiece.Count == 0)
                 {
                     boardState = "CLEAR_BOARD";
-                }break;
+                }
+                break;
             case "CLEAR_BOARD":
                 boardLogic.MovePiece(boardClearSolution.orgX, boardClearSolution.orgY, boardClearSolution.dirX, boardClearSolution.dirY);
                 if (boardLogic.CanMove(boardClearSolution.orgX, boardClearSolution.orgY, 0, 0))
@@ -104,7 +113,7 @@ public class GameManager : MonoBehaviour {
                 int[] board = boardLogic.GetBoard();
                 for (int i = 0; i < board.Length; i++)
                 {
-                    if(board[i] == -1)
+                    if (board[i] == -1)
                     {
                         int y = Mathf.FloorToInt(i / width);
                         int x = i - (y * width);
@@ -112,29 +121,35 @@ public class GameManager : MonoBehaviour {
                     }
                 }
                 break;
-            case "CLEAR_BOARD_TWEEN":if(tweeningPiece.Count == 0)
+            case "CLEAR_BOARD_TWEEN":
+                if (tweeningPiece.Count == 0)
                 {
                     boardState = "SHIFT_DOWN";
-                }break;
+                }
+                break;
             case "SHIFT_DOWN":
                 ShiftPiecesDown();
                 boardLogic.ShiftPiecesDown();
                 boardState = "SHIFT_DOWN_TWEEN";
                 break;
-            case "SHIFT_DOWN_TWEEN":if(tweeningPiece.Count == 0)
+            case "SHIFT_DOWN_TWEEN":
+                if (tweeningPiece.Count == 0)
                 {
                     boardState = "FILL_BOARD";
-                }break;
+                }
+                break;
             case "FILL_BOARD":
                 RefillBoard();
                 boardState = "ENTER_DROPDOWN_ANIMATION";
                 break;
             case "ENTER_DROPDOWN_ANIMATION":
                 break;
-            case "STAY_DROPDOWN_ANIMATION": if(tweeningPiece.Count == 0)
+            case "STAY_DROPDOWN_ANIMATION":
+                if (tweeningPiece.Count == 0)
                 {
                     boardState = "INITIAL";
-                }break;
+                }
+                break;
 
         }
     }

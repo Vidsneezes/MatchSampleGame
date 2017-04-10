@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler{
 
+    //TODO add drop down methods for new pieces
 
     public SpriteRenderer spriteRenderer;
     public int x;
