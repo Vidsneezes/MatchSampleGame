@@ -418,8 +418,10 @@ public class GameManager : MonoBehaviour {
             newPiece.gameManager = this;
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
-            newPiece.transform.localPosition = new Vector3(x * pieceWidth, y * InvertedHeight, 0);
+            newPiece.transform.localPosition = new Vector3(x * pieceWidth, 20, 0);
             activePieces.Add(newPiece);
+            tweeningPiece.Add(newPiece);
+            newPiece.ShiftDownOnFill(y * InvertedHeight);
         }
       
     }
