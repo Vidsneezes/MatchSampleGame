@@ -17,17 +17,10 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
+
+
+
     
-
-
-    //TODO disable touch while pieces are falling
-
-    //TODO Implemente remaining states in reducer
-
-    //TODO restore state after done with drop down
-
-    //TODO add drop down animate
-
 
 
     public BoardPieceController piecePrefab;
