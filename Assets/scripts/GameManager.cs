@@ -407,7 +407,6 @@ public class GameManager : MonoBehaviour {
         List<int> positionsToRefil = new List<int>();
 
         int[] board = boardLogic.GetBoard();
-
         for (int i = 0; i < board.Length; i++)
         {
             if(board[i] == -1)
@@ -417,6 +416,7 @@ public class GameManager : MonoBehaviour {
         }
 
         boardLogic.RefillBoard();
+        board = boardLogic.GetBoard();
 
         for (int v = 0; v < positionsToRefil.Count; v++)
         {
@@ -434,6 +434,7 @@ public class GameManager : MonoBehaviour {
             newPiece.SetSprite(pieceSprite[pieceType]);
             newPiece.gameObject.SetActive(true);
             newPiece.transform.localPosition = new Vector3(x * pieceWidth, 20, 0);
+            newPiece.transform.localScale = new Vector3(1, 1, 1);
             activePieces.Add(newPiece);
             tweeningPiece.Add(newPiece);
             newPiece.ShiftDownOnFill(y * InvertedHeight);

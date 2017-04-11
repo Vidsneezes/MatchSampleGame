@@ -160,7 +160,6 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         {
             if (eventData.delta.x > 0)
             {
-                Debug.Log(x + " " + y);
                 if (gameManager.CanMove(x, y, 1, 0))
                 {
                     gameManager.DoMove(x, y, 1, 0);
