@@ -131,6 +131,7 @@ MonoBehaviour:
   height: 8
   pieceWidth: 1.29
   pieceHeight: 1.385
+  waitDelay: 0.3
   horizontalOffset: 0
   verticalOffset: 0
   pieceHolder: {fileID: 923314594}

@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour {
     public float pieceWidth;
     public float pieceHeight;
 
+    public float waitDelay;
+
     public float InvertedHeight
     {
         get
@@ -57,12 +59,14 @@ public class GameManager : MonoBehaviour {
     private List<Sprite> pieceSprite;
     private List<BoardPieceController> tweeningPiece;
 
+    private float delayer;
+
     private void Awake () {
         boardLogic = new BoardLogic(width, height);
         boardLogic.FillBoardWithCells();
         activePieces = new List<BoardPieceController>();
         inactivePieces = new List<BoardPieceController>();
-        for (int i = 0; i < (width*height)+10; i++)
+        for (int i = 0; i < (width*height)*2; i++)
         {
             BoardPieceController piece = GameObject.Instantiate(piecePrefab,inactiveHolder);
             piece.gameObject.SetActive(false);
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour {
         canMove = true;
         tweeningPiece = new List<BoardPieceController>();
         boardState = "INITIAL";
+        delayer = 1;
     }
 
     private void Update()
@@ -110,6 +115,7 @@ public class GameManager : MonoBehaviour {
                 }
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
                 boardState = "CLEAR_BOARD_TWEEN";
+                delayer = Time.time + waitDelay;
                 int[] board = boardLogic.GetBoard();
                 for (int i = 0; i < board.Length; i++)
                 {
@@ -124,30 +130,39 @@ public class GameManager : MonoBehaviour {
             case "CLEAR_BOARD_TWEEN":
                 if (tweeningPiece.Count == 0)
                 {
-                    boardState = "SHIFT_DOWN";
+                    if(delayer - Time.time < 0)
+                    {
+                        boardState = "SHIFT_DOWN";
+                    }
                 }
                 break;
             case "SHIFT_DOWN":
                 ShiftPiecesDown();
                 boardLogic.ShiftPiecesDown();
                 boardState = "SHIFT_DOWN_TWEEN";
+                delayer = Time.time + waitDelay;
                 break;
             case "SHIFT_DOWN_TWEEN":
                 if (tweeningPiece.Count == 0)
                 {
-                    boardState = "FILL_BOARD";
+                    if (delayer - Time.time < 0)
+                    {
+                        boardState = "FILL_BOARD";
+                    }
                 }
                 break;
             case "FILL_BOARD":
                 RefillBoard();
-                boardState = "ENTER_DROPDOWN_ANIMATION";
-                break;
-            case "ENTER_DROPDOWN_ANIMATION":
+                boardState = "STAY_DROPDOWN_ANIMATION";
+                delayer = Time.time + waitDelay;
                 break;
             case "STAY_DROPDOWN_ANIMATION":
                 if (tweeningPiece.Count == 0)
                 {
-                    boardState = "INITIAL";
+                    if (delayer - Time.time < 0)
+                    {
+                        boardState = "INITIAL";
+                    }
                 }
                 break;
 
