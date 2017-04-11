@@ -54,6 +54,18 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
     }
     #endregion
 
+    #region SHIFT_DOWN_ON_FILL
+    public void ShiftDownOnFill(float pos)
+    {
+        transform.DOLocalMoveY(pos, 0.2f).OnComplete(OnShiftDownOnFill);
+    }
+
+    private void OnShiftDownOnFill()
+    {
+        gameManager.PieceTweenDone(this);
+    }
+    #endregion
+
     #region PLAYER INTERACTION TWEENS
     protected void OnMotionDone()
     {
