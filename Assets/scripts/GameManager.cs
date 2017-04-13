@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-
-    //TODO prevent alike pieces from switching with each other
-
     //TODO add main menu and results screen
 
     //TODO add boot loader
+
+        //TODO add progress logic
+
+        //TODO add Progress UI
 
 
     public BoardPieceController piecePrefab;
