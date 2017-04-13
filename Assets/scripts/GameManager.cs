@@ -461,3 +461,4 @@ public struct BoardClearSolution
     public int oldType;
     public int orginType;
 }
+

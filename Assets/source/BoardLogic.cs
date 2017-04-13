@@ -230,3 +230,10 @@ public class BoardLogic {
         Debug.Log(boardDisplay);
     }
 }
+
+
+public struct MovePieceMeta
+{
+    bool canMove;
+    bool same;
+}
