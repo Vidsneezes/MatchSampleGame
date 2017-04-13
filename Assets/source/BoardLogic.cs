@@ -131,17 +131,21 @@ public class BoardLogic {
         }
     }
 
-    public bool CanMove(int orX, int orY, int dirX, int dirY)
+    public MovePieceMeta CanMove(int orX, int orY, int dirX, int dirY)
     {
         int newPosX = orX + dirX;
         int newPosY = orY + dirY;
         int original = boardMatrix[orX + orY * _boardWidth];
         int possibleConnections = 0;
         int val_1 = 0, val_2 = 0, val_3 = 0;
+        MovePieceMeta movePieceMeta;
+        movePieceMeta.canMove = false;
+        movePieceMeta.same = false;
 
         if (original == boardMatrix[newPosX + newPosY * boardWidth])
         {
-            return false;
+            movePieceMeta.same = true;
+            return movePieceMeta;
         }
         if (dirY == -1)
         {
@@ -168,9 +172,10 @@ public class BoardLogic {
 
         if (possibleConnections >= 2)
         {
-            return true;
+            movePieceMeta.canMove = true;
+            return movePieceMeta;
         }
-        return false;
+        return movePieceMeta;
     }
 
     public int MakeConnection(int original, int newX, int newY, int dirX, int dirY)
@@ -234,6 +239,6 @@ public class BoardLogic {
 
 public struct MovePieceMeta
 {
-    bool canMove;
-    bool same;
+    public bool canMove;
+    public bool same;
 }
