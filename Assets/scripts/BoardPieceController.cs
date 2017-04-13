@@ -156,61 +156,25 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
             return;
         }
 
-        if (Mathf.Abs(eventData.delta.y) < 5)
+        MovePieceMeta movePieceMeta;
+        movePieceMeta.canMove = false;
+        movePieceMeta.same = false;
+        movePieceMeta.dirY = Mathf.Abs(eventData.delta.y) < 5 ? 0 : (int)Mathf.Sign(-eventData.delta.y);
+        movePieceMeta.dirX = movePieceMeta.dirY == 0 ? (int)Mathf.Sign(eventData.delta.x) : 0;
+
+        movePieceMeta = gameManager.CanMove(x, y, movePieceMeta.dirX, movePieceMeta.dirY);
+        if (movePieceMeta.canMove)
         {
-            if (eventData.delta.x > 0)
-            {
-                if (gameManager.CanMove(x, y, 1, 0))
-                {
-                    gameManager.DoMove(x, y, 1, 0);
-                }
-                else
-                {
-                    gameManager.DoFakeMove(x, y, 1, 0);
-                }
-                gameManager.canMove = false;
-            }
-            else if (eventData.delta.x < 0)
-            {
-                if (gameManager.CanMove(x, y, -1, 0))
-                {
-                    gameManager.DoMove(x, y, -1, 0);
-                }
-                else
-                {
-                    gameManager.DoFakeMove(x, y, -1, 0);
-                }
-                gameManager.canMove = false;
-            }
+            gameManager.DoMove(x, y, movePieceMeta.dirX, movePieceMeta.dirY);
         }
         else
         {
-            if (eventData.delta.y > 0)
+            if (!movePieceMeta.same)
             {
-                if (gameManager.CanMove(x, y, 0, -1))
-                {
-                    gameManager.DoMove(x, y, 0, -1);
-                }
-                else
-                {
-                    gameManager.DoFakeMove(x, y, 0, -1);
-                }
-                gameManager.canMove = false;
-
-            }
-            else if (eventData.delta.y < 0)
-            {
-                if (gameManager.CanMove(x, y, 0, 1))
-                {
-                    gameManager.DoMove(x, y, 0, 1);
-                }
-                else
-                {
-                    gameManager.DoFakeMove(x, y, 0, 1);
-                }
-                gameManager.canMove = false;
+                gameManager.DoFakeMove(x, y, movePieceMeta.dirX, movePieceMeta.dirY);
             }
         }
+        gameManager.canMove = false;
     }
     #endregion
 }

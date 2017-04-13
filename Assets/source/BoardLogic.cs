@@ -141,6 +141,8 @@ public class BoardLogic {
         MovePieceMeta movePieceMeta;
         movePieceMeta.canMove = false;
         movePieceMeta.same = false;
+        movePieceMeta.dirX = dirX;
+        movePieceMeta.dirY = dirY;
 
         if (original == boardMatrix[newPosX + newPosY * boardWidth])
         {
@@ -241,4 +243,8 @@ public struct MovePieceMeta
 {
     public bool canMove;
     public bool same;
+
+    public int dirX;
+    public int dirY;
+
 }

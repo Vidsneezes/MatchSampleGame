@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
                 break;
             case "CLEAR_BOARD":
                 boardLogic.MovePiece(boardClearSolution.orgX, boardClearSolution.orgY, boardClearSolution.dirX, boardClearSolution.dirY);
-                if (boardLogic.CanMove(boardClearSolution.orgX, boardClearSolution.orgY, 0, 0))
+                if (boardLogic.CanMove(boardClearSolution.orgX, boardClearSolution.orgY, 0, 0).canMove)
                 {
                     boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
                 }
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public bool CanMove(int x, int y, int dirX, int dirY)
+    public MovePieceMeta CanMove(int x, int y, int dirX, int dirY)
     {
         return boardLogic.CanMove(x, y, dirX, dirY);
     }
@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour {
     public void ClearBoard(int x, int y)
     {
         int type = boardLogic.GetBoard()[x + y * boardLogic.boardWidth];
-        if (boardLogic.CanMove(x, y,0,0))
+        if (boardLogic.CanMove(x, y,0,0).canMove)
         {
             boardLogic.ClearConnectedType(type, x, y);
             RemovePieces();
