@@ -139,26 +139,30 @@ public class BoardLogic {
         int possibleConnections = 0;
         int val_1 = 0, val_2 = 0, val_3 = 0;
 
+        if (original == boardMatrix[newPosX + newPosY * boardWidth])
+        {
+            return false;
+        }
         if (dirY == -1)
         {
-            val_1 = MakeConnection(original, newPosX , newPosY , -1, 0);
-            val_2 = MakeConnection(original, newPosX , newPosY , 1, 0);
-            val_3 = MakeConnection(original, newPosX, newPosY ,0, -1);
+            val_1 = MakeConnection(original, newPosX, newPosY, -1, 0);
+            val_2 = MakeConnection(original, newPosX, newPosY, 1, 0);
+            val_3 = MakeConnection(original, newPosX, newPosY, 0, -1);
         }else if(dirY == 1)
         {
-            val_1 = MakeConnection(original, newPosX , newPosY,-1,0);
-            val_2 = MakeConnection(original, newPosX , newPosY, 1,0 );
-            val_3 = MakeConnection(original, newPosX, newPosY ,0,1);
+            val_1 = MakeConnection(original, newPosX, newPosY, -1, 0);
+            val_2 = MakeConnection(original, newPosX, newPosY, 1, 0);
+            val_3 = MakeConnection(original, newPosX, newPosY, 0, 1);
         }else if(dirX == -1)
         {
-            val_1 = MakeConnection(original, newPosX , newPosY ,0,-1);
-            val_2 = MakeConnection(original, newPosX , newPosY ,0,1);
-            val_3 = MakeConnection(original, newPosX , newPosY,-1,0);
+            val_1 = MakeConnection(original, newPosX, newPosY, 0, -1);
+            val_2 = MakeConnection(original, newPosX, newPosY, 0, 1);
+            val_3 = MakeConnection(original, newPosX, newPosY, -1, 0);
         }else if(dirX == 1)
         {
-            val_1 = MakeConnection(original, newPosX , newPosY, 0,-1);
-            val_2 = MakeConnection(original, newPosX , newPosY, 0 ,1);
-            val_3 = MakeConnection(original, newPosX , newPosY,1,0);
+            val_1 = MakeConnection(original, newPosX, newPosY, 0, -1);
+            val_2 = MakeConnection(original, newPosX, newPosY, 0, 1);
+            val_3 = MakeConnection(original, newPosX, newPosY, 1, 0);
         }
         possibleConnections = val_1 + val_2 + val_3;
 

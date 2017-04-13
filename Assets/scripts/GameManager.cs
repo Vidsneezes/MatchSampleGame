@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour {
 
     //TODO prevent alike pieces from switching with each other
 
-        //TODO add main menu and results screen
+    //TODO add main menu and results screen
 
-        //TODO add boot loader
+    //TODO add boot loader
 
 
     public BoardPieceController piecePrefab;
