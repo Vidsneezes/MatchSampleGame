@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour {
     public Transform inactiveHolder;
     public bool canMove;
     public string boardState;
+    public int totdalPoints;
     public BoardClearSolution boardClearSolution;
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviour {
                 boardState = "CLEAR_BOARD_TWEEN";
                 delayer = Time.time + waitDelay;
                 int[] board = boardLogic.GetBoard();
+                int pointsToAdd = 0;
                 for (int i = 0; i < board.Length; i++)
                 {
                     if (board[i] == -1)
@@ -120,8 +122,10 @@ public class GameManager : MonoBehaviour {
                         int y = Mathf.FloorToInt(i / width);
                         int x = i - (y * width);
                         ShrinkPiece(x, y);
+                        pointsToAdd += i * 23;
                     }
                 }
+                totdalPoints += pointsToAdd;
                 break;
             case "CLEAR_BOARD_TWEEN":
                 if (tweeningPiece.Count == 0)
