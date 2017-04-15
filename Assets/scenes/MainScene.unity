@@ -132,6 +132,7 @@ MonoBehaviour:
   pieceWidth: 1.29
   pieceHeight: 1.385
   waitDelay: 0.3
+  pointsDisplay: {fileID: 1375618568}
   horizontalOffset: 0
   verticalOffset: 0
   pieceHolder: {fileID: 923314594}
@@ -342,11 +343,11 @@ RectTransform:
   m_Father: {fileID: 1738966824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5.16}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 54.19, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1375618568
 MonoBehaviour:
   m_ObjectHideFlags: 0

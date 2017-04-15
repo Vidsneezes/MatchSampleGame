@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
 
     public float waitDelay;
 
+    public Text pointsDisplay;
+
     public float InvertedHeight
     {
         get
@@ -134,6 +136,7 @@ public class GameManager : MonoBehaviour {
                     if(delayer - Time.time < 0)
                     {
                         boardState = "SHIFT_DOWN";
+                        pointsDisplay.text = totdalPoints.ToString();
                     }
                 }
                 break;
