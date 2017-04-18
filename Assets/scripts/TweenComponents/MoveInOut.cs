@@ -22,6 +22,9 @@ public class MoveInOut : MonoBehaviour {
         transform.localPosition = startPosition;
         Sequence startPanelSequence = DOTween.Sequence();
         startPanelSequence.Append(transform.DOLocalMove(midPosition, enterDuration).SetEase(Ease.InCubic));
-        startPanelSequence.Append(transform.DOLocalMove(exitPosition, exitDuration).SetEase(Ease.InCubic).SetDelay(holdDuration));
+        if (exitDuration > 0)
+        {
+            startPanelSequence.Append(transform.DOLocalMove(exitPosition, exitDuration).SetEase(Ease.InCubic).SetDelay(holdDuration));
+        }
     }
 }

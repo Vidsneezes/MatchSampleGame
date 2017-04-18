@@ -349,7 +349,7 @@ MonoBehaviour:
   pieceWidth: 1.29
   pieceHeight: 1.385
   waitDelay: 0.3
-  startDelay: 0.82
+  startDelay: 1.35
   time: 0
   pointsDisplay: {fileID: 1375618568}
   timeDisplay: {fileID: 75395674}
@@ -557,6 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterDuration: 0.5
+  holdDuration: 0.5
   exitDuration: 0.3
   startPosition: {x: 960, y: 0, z: 0}
   midPosition: {x: 0, y: 0, z: 0}
@@ -1086,6 +1087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterDuration: 0.4
+  holdDuration: 0.3
   exitDuration: 0.6
   startPosition: {x: -960, y: 0, z: 0}
   midPosition: {x: 0, y: 0, z: 0}
