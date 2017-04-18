@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour {
         delayer = 1;
         time = 15;
         timeDisplay.text = time.ToString(TIME_SCHEME);
-        donePanel.SetActive(false);
         startPanel.SetActive(true);
         startDelayCounter = Time.time;
     }
