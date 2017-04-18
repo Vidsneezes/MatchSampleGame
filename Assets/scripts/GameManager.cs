@@ -6,15 +6,16 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    private string INITIAL = "INITIAL";
-    private string FAKE_MOVE = "FAKE_MOVE";
-    private string FIRST_PIECE_TWEEN = "FIRST_PIECE_TWEEN";
-    private string CLEAR_BOARD = "CLEAR_BOARD";
-    private string CLEAR_BOARD_TWEEN = "CLEAR_BOARD_TWEEN";
-    private string SHIFT_DOWN = "SHIFT_DOWN";
-    private string SHIFT_DOWN_TWEEN = "SHIFT_DOWN_TWEEN";
-    private string FILL_BOARD = "FILL_BOARD";
-    private string STAY_DROPDOWN_ANIMATION = "STAY_DROPDOWN_ANIMATION";
+    private const string INITIAL = "INITIAL";
+    private const string FAKE_MOVE = "FAKE_MOVE";
+    private const string FIRST_PIECE_TWEEN = "FIRST_PIECE_TWEEN";
+    private const string CLEAR_BOARD = "CLEAR_BOARD";
+    private const string CLEAR_BOARD_TWEEN = "CLEAR_BOARD_TWEEN";
+    private const string SHIFT_DOWN = "SHIFT_DOWN";
+    private const string SHIFT_DOWN_TWEEN = "SHIFT_DOWN_TWEEN";
+    private const string FILL_BOARD = "FILL_BOARD";
+    private const string STAY_DROPDOWN_ANIMATION = "STAY_DROPDOWN_ANIMATION";
+    private const string TIME_SCHEME = "0:00";
 
 
 
@@ -97,10 +98,10 @@ public class GameManager : MonoBehaviour {
         CreateFromBoard();
         canMove = true;
         tweeningPiece = new List<BoardPieceController>();
-        boardState = "INITIAL";
+        boardState = INITIAL;
         delayer = 1;
         time = 15;
-        timeDisplay.text = time.ToString("0:00");
+        timeDisplay.text = time.ToString(TIME_SCHEME);
     }
 
     private void Update()
@@ -112,9 +113,9 @@ public class GameManager : MonoBehaviour {
     {
         switch (boardState)
         {
-            case "INITIAL": canMove = true;
+            case INITIAL: canMove = true;
                 time -= Time.deltaTime;
-                timeDisplay.text = time.ToString("0:00");
+                timeDisplay.text = time.ToString(TIME_SCHEME);
                 if(time <= 0)
                 {
                     canMove = false;
@@ -125,26 +126,26 @@ public class GameManager : MonoBehaviour {
                     }
                 }
                 break;
-            case "FAKE_MOVE":
+            case FAKE_MOVE:
                 if (tweeningPiece.Count == 0)
                 {
-                    boardState = "INITIAL";
+                    boardState = INITIAL;
                 }
                 break;
-            case "FIRST_PIECE_TWEEN":
+            case FIRST_PIECE_TWEEN:
                 if (tweeningPiece.Count == 0)
                 {
-                    boardState = "CLEAR_BOARD";
+                    boardState = CLEAR_BOARD;
                 }
                 break;
-            case "CLEAR_BOARD":
+            case CLEAR_BOARD:
                 boardLogic.MovePiece(boardClearSolution.orgX, boardClearSolution.orgY, boardClearSolution.dirX, boardClearSolution.dirY);
                 if (boardLogic.CanMove(boardClearSolution.orgX, boardClearSolution.orgY, 0, 0).canMove)
                 {
                     boardLogic.ClearConnectedType(boardClearSolution.oldType, boardClearSolution.orgX, boardClearSolution.orgY);
                 }
                 boardLogic.ClearConnectedType(boardClearSolution.orginType, boardClearSolution.destiX, boardClearSolution.destiY);
-                boardState = "CLEAR_BOARD_TWEEN";
+                boardState = CLEAR_BOARD_TWEEN;
                 delayer = Time.time + waitDelay;
                 int[] board = boardLogic.GetBoard();
                 int pointsToAdd = 0;
@@ -160,42 +161,42 @@ public class GameManager : MonoBehaviour {
                 }
                 totdalPoints += pointsToAdd;
                 break;
-            case "CLEAR_BOARD_TWEEN":
+            case CLEAR_BOARD_TWEEN:
                 if (tweeningPiece.Count == 0)
                 {
                     if(delayer - Time.time < 0)
                     {
-                        boardState = "SHIFT_DOWN";
+                        boardState = SHIFT_DOWN;
                         pointsDisplay.text = totdalPoints.ToString();
                     }
                 }
                 break;
-            case "SHIFT_DOWN":
+            case SHIFT_DOWN:
                 ShiftPiecesDown();
                 boardLogic.ShiftPiecesDown();
-                boardState = "SHIFT_DOWN_TWEEN";
+                boardState = SHIFT_DOWN_TWEEN;
                 delayer = Time.time + waitDelay;
                 break;
-            case "SHIFT_DOWN_TWEEN":
+            case SHIFT_DOWN_TWEEN:
                 if (tweeningPiece.Count == 0)
                 {
                     if (delayer - Time.time < 0)
                     {
-                        boardState = "FILL_BOARD";
+                        boardState = FILL_BOARD;
                     }
                 }
                 break;
-            case "FILL_BOARD":
+            case FILL_BOARD:
                 RefillBoard();
-                boardState = "STAY_DROPDOWN_ANIMATION";
+                boardState = STAY_DROPDOWN_ANIMATION;
                 delayer = Time.time + waitDelay;
                 break;
-            case "STAY_DROPDOWN_ANIMATION":
+            case STAY_DROPDOWN_ANIMATION:
                 if (tweeningPiece.Count == 0)
                 {
                     if (delayer - Time.time < 0)
                     {
-                        boardState = "INITIAL";
+                        boardState = INITIAL;
                     }
                 }
                 break;
@@ -265,7 +266,7 @@ public class GameManager : MonoBehaviour {
         AnimateMove(boardClearSolution.destiX, boardClearSolution.destiY, -dirX, -dirY);
 
         //Move to a tween friendly state
-        boardState = "FIRST_PIECE_TWEEN";
+        boardState = FIRST_PIECE_TWEEN;
     }
 
     public void DoFakeMove(int orgX, int orgY, int dirX, int dirY)
@@ -274,7 +275,7 @@ public class GameManager : MonoBehaviour {
         int destY = orgY + dirY;
         AnimateFeintMove(orgX, orgY, dirX, dirY);
         AnimateFeintMove(destX, destY, -dirX, -dirY);
-        boardState = "FAKE_MOVE";
+        boardState = FAKE_MOVE;
 
     }
 
