@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour {
                 {
                     canMove = false;
                     boardState = "-";
+                    donePanel.gameObject.SetActive(true);
                     if(onTimeDone != null)
                     {
                         onTimeDone();
