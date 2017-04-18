@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour {
     public bool canMove;
     public string boardState;
     public int totdalPoints;
+    public Action onTimeDone;
     public BoardClearSolution boardClearSolution;
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
@@ -101,6 +103,13 @@ public class GameManager : MonoBehaviour {
             case "INITIAL": canMove = true;
                 time -= Time.deltaTime;
                 timeDisplay.text = time.ToString("0:00");
+                if(time <= 0)
+                {
+                    if(onTimeDone != null)
+                    {
+                        onTimeDone();
+                    }
+                }
                 break;
             case "FAKE_MOVE":
                 if (tweeningPiece.Count == 0)
