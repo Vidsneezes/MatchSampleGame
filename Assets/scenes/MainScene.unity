@@ -352,6 +352,8 @@ MonoBehaviour:
   time: 0
   pointsDisplay: {fileID: 1375618568}
   timeDisplay: {fileID: 75395674}
+  donePanel: {fileID: 1812527247}
+  startPanel: {fileID: 618696076}
   horizontalOffset: 0
   verticalOffset: 0
   pieceHolder: {fileID: 923314594}

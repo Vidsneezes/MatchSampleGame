@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour {
 
@@ -16,8 +17,6 @@ public class GameManager : MonoBehaviour {
     private const string FILL_BOARD = "FILL_BOARD";
     private const string STAY_DROPDOWN_ANIMATION = "STAY_DROPDOWN_ANIMATION";
     private const string TIME_SCHEME = "0:00";
-
-
 
     public Sprite bluePiece;
     public Sprite greenPiece;
@@ -55,6 +54,9 @@ public class GameManager : MonoBehaviour {
     public float time;
     public Text pointsDisplay;
     public Text timeDisplay;
+
+    public GameObject donePanel;
+    public GameObject startPanel;
 
     public float InvertedHeight
     {
@@ -102,6 +104,9 @@ public class GameManager : MonoBehaviour {
         delayer = 1;
         time = 15;
         timeDisplay.text = time.ToString(TIME_SCHEME);
+
+        donePanel.SetActive(false);
+        startPanel.SetActive(true);
     }
 
     private void Update()
