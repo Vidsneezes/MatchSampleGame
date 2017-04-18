@@ -234,7 +234,7 @@ public class BoardLogic {
                 boardDisplay += "\n";
             }
         }
-        Debug.Log(boardDisplay);
+
     }
 }
 

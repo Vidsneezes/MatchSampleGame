@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour {
 
     public float waitDelay;
 
+    public float time;
     public Text pointsDisplay;
+    public Text timeDisplay;
 
     public float InvertedHeight
     {
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour {
         tweeningPiece = new List<BoardPieceController>();
         boardState = "INITIAL";
         delayer = 1;
+        time = 25;
+        timeDisplay.text = time.ToString("0:00");
     }
 
     private void Update()
