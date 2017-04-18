@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject donePanel;
     public GameObject startPanel;
+    public GameObject fadeChanger;
 
     public float InvertedHeight
     {
@@ -133,6 +134,7 @@ public class GameManager : MonoBehaviour {
                     canMove = false;
                     boardState = "-";
                     donePanel.gameObject.SetActive(true);
+                    fadeChanger.gameObject.SetActive(true);
                     if(onTimeDone != null)
                     {
                         onTimeDone();

@@ -355,6 +355,7 @@ MonoBehaviour:
   timeDisplay: {fileID: 75395674}
   donePanel: {fileID: 1812527247}
   startPanel: {fileID: 618696076}
+  fadeChanger: {fileID: 1058937613}
   horizontalOffset: 0
   verticalOffset: 0
   pieceHolder: {fileID: 923314594}
@@ -704,12 +705,12 @@ GameObject:
   - component: {fileID: 1058937615}
   - component: {fileID: 1058937617}
   m_Layer: 5
-  m_Name: FadeOutScreen
+  m_Name: FadeChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1058937614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -773,9 +774,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 1.2
+  delay: 1.3
   endAlpha: 1
   startAlpha: 0
-  image: {fileID: 0}
 --- !u!1 &1375618566
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using DG.Tweening;
 public class FadeChanger : MonoBehaviour {
 
     public float duration;
+    public float delay;
     public float endAlpha;
     public float startAlpha;
     private Image image;
@@ -24,6 +25,6 @@ public class FadeChanger : MonoBehaviour {
     public void BeginFade()
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, startAlpha);
-        DOTween.ToAlpha(() => image.color, x => image.color = x, endAlpha, duration);
+        DOTween.ToAlpha(() => image.color, x => image.color = x, endAlpha, duration).SetDelay(delay);
     }
 }
