@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour {
 
+    private const string START_DELAY = "START_DELAY";
     private const string INITIAL = "INITIAL";
     private const string FAKE_MOVE = "FAKE_MOVE";
     private const string FIRST_PIECE_TWEEN = "FIRST_PIECE_TWEEN";
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour {
     public float pieceHeight;
 
     public float waitDelay;
+    public float startDelay;
 
     public float time;
     public Text pointsDisplay;
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour {
     private BoardLogic boardLogic;
     private List<Sprite> pieceSprite;
     private List<BoardPieceController> tweeningPiece;
-
+    private float startDelayCounter;
     private float delayer;
 
     private void Awake () {
@@ -100,13 +102,13 @@ public class GameManager : MonoBehaviour {
         CreateFromBoard();
         canMove = true;
         tweeningPiece = new List<BoardPieceController>();
-        boardState = INITIAL;
+        boardState = START_DELAY;
         delayer = 1;
         time = 15;
         timeDisplay.text = time.ToString(TIME_SCHEME);
-
         donePanel.SetActive(false);
         startPanel.SetActive(true);
+        startDelayCounter = Time.time;
     }
 
     private void Update()
@@ -118,6 +120,12 @@ public class GameManager : MonoBehaviour {
     {
         switch (boardState)
         {
+            case START_DELAY:
+                if(Time.time - startDelayCounter > startDelay)
+                {
+                    boardState = INITIAL;
+                }
+                break;
             case INITIAL: canMove = true;
                 time -= Time.deltaTime;
                 timeDisplay.text = time.ToString(TIME_SCHEME);
