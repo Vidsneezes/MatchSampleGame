@@ -6,6 +6,18 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    private string INITIAL = "INITIAL";
+    private string FAKE_MOVE = "FAKE_MOVE";
+    private string FIRST_PIECE_TWEEN = "FIRST_PIECE_TWEEN";
+    private string CLEAR_BOARD = "CLEAR_BOARD";
+    private string CLEAR_BOARD_TWEEN = "CLEAR_BOARD_TWEEN";
+    private string SHIFT_DOWN = "SHIFT_DOWN";
+    private string SHIFT_DOWN_TWEEN = "SHIFT_DOWN_TWEEN";
+    private string FILL_BOARD = "FILL_BOARD";
+    private string STAY_DROPDOWN_ANIMATION = "STAY_DROPDOWN_ANIMATION";
+
+
+
     public Sprite bluePiece;
     public Sprite greenPiece;
     public Sprite purplePiece;
@@ -105,6 +117,8 @@ public class GameManager : MonoBehaviour {
                 timeDisplay.text = time.ToString("0:00");
                 if(time <= 0)
                 {
+                    canMove = false;
+                    boardState = "-";
                     if(onTimeDone != null)
                     {
                         onTimeDone();
