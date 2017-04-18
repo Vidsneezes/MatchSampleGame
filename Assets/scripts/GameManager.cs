@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour {
         tweeningPiece = new List<BoardPieceController>();
         boardState = "INITIAL";
         delayer = 1;
-        time = 25;
+        time = 15;
         timeDisplay.text = time.ToString("0:00");
     }
 
@@ -98,7 +98,10 @@ public class GameManager : MonoBehaviour {
     {
         switch (boardState)
         {
-            case "INITIAL": canMove = true; break;
+            case "INITIAL": canMove = true;
+                time -= Time.deltaTime;
+                timeDisplay.text = time.ToString("0:00");
+                break;
             case "FAKE_MOVE":
                 if (tweeningPiece.Count == 0)
                 {
