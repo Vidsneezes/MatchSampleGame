@@ -33,10 +33,11 @@ public class GameStateStore : MonoBehaviour {
 
     public void ReduceEndGame(float localScore)
     {
-        stateStore.SetFloat("localscore", localScore);
-        SceneChangeStruct sceneChangeStruct;
-        sceneChangeStruct.unloadScene = "MainScene";
-        sceneChangeStruct.loadScene = "HighscoreScene";
+     
+    }
+
+    public void ChangeScene(SceneChangeStruct sceneChangeStruct)
+    {
         StartCoroutine(SceneChangeRoutine(sceneChangeStruct));
     }
 
@@ -96,7 +97,11 @@ public static class ActionDispatcher
         GameStateStore gameStateStore;
         if(GetGameStateStore(out gameStateStore))
         {
-            gameStateStore.ReduceEndGame(localScore);
+            gameStateStore._StateStore.SetFloat("localscore", localScore);
+            SceneChangeStruct sceneChangeStruct;
+            sceneChangeStruct.unloadScene = "MainScene";
+            sceneChangeStruct.loadScene = "HighscoreScene";
+            gameStateStore.ChangeScene(sceneChangeStruct);
         }
     }
 
