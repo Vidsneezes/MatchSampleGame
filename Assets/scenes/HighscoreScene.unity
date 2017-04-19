@@ -917,6 +917,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1120222463}
+  - component: {fileID: 1120222464}
   m_Layer: 0
   m_Name: LogicContainer
   m_TagString: Untagged
@@ -937,6 +938,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120222464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1120222462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bea0b77757026548ba806676223192c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continueButton: {fileID: 1975156255}
+  highscoreText: {fileID: 1355270964}
+  localScoreText: {fileID: 1517088421}
 --- !u!1 &1208996572
 GameObject:
   m_ObjectHideFlags: 0

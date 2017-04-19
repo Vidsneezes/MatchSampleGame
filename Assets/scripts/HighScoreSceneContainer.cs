@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class HighScoreSceneContainer : MonoBehaviour {
 
 
-    public Button startButton;
+    public Button continueButton;
     public Text highscoreText;
     public Text localScoreText;
 
@@ -16,7 +16,7 @@ public class HighScoreSceneContainer : MonoBehaviour {
     // Use this for initialization
     private void Start()
     {
-        startButton.onClick.AddListener(OnContinueButtonClicked);
+        continueButton.onClick.AddListener(OnContinueButtonClicked);
         highscoreText.text = "highscore : 00000000";
         localScoreText.text = "00000000";
     }
