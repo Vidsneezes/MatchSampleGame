@@ -11,8 +11,6 @@ public class HighScoreSceneContainer : MonoBehaviour {
     public Text highscoreText;
     public Text localScoreText;
 
-    public Action onContinueButtonClicked;
-
     // Use this for initialization
     private void Start()
     {
@@ -23,9 +21,6 @@ public class HighScoreSceneContainer : MonoBehaviour {
 
     private void OnContinueButtonClicked()
     {
-        if (onContinueButtonClicked != null)
-        {
-            onContinueButtonClicked();
-        }
+        ActionDispatcher.Dispatch(ActionDispatcher.GO_TO_MAINMENU);
     }
 }

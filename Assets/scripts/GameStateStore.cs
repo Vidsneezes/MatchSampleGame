@@ -20,63 +20,33 @@ public class GameStateStore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        ToMainMenu();
 	}
 	
     public void ReduceState(string action)
     {
-
+        StartCoroutine(ReduceStateRoutine(action));
     }
 
     private IEnumerator ReduceStateRoutine(string action)
     {
-        switch (state)
+        switch (action)
         {
-            case MAIN_MENU:
-                MainMenuContainer mainMenuContainer = GameObject.FindObjectOfType<MainMenuContainer>();
-                mainMenuContainer.onStartButtonClicked += ToGame;
-                float highscore = PlayerPrefs.GetFloat(FLOAT_HIGHSCORE);
+            case ActionDispatcher.START_GAME:
                 break;
-            case GAME:
-                GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
-                gameManager.onTimeDone += EndGame;
+            case ActionDispatcher.GO_TO_MAINMENU:
                 break;
-            case HIGHSCORE:
-                HighScoreSceneContainer highScoreContainer = GameObject.FindObjectOfType<HighScoreSceneContainer>();
-                highScoreContainer.onContinueButtonClicked += ToMainMenu;
+            case ActionDispatcher.END_GAME:
                 break;
         }
-        state = "-";
         yield return new WaitForEndOfFrame();
     }
-
-    private void ToMainMenu()
-    {
-        state = MAIN_MENU;
-    }
-
-    private void ToGame()
-    {
-        state = GAME;
-    }
-
-    private void ToHighscore()
-    {
-        state = HIGHSCORE;
-    }
-
-    private void EndGame()
-    {
-
-    }
-
 }
 
 public static class ActionDispatcher
 {
-    public static string START_GAME = "START_GAME";
-    public static string END_GAME = "END_GAME";
-    public static string GO_TO_MAINMENU = "GO_TO_MAINMENU";
+    public const string START_GAME = "START_GAME";
+    public const string END_GAME = "END_GAME";
+    public const string GO_TO_MAINMENU = "GO_TO_MAINMENU";
 
     public static void Dispatch(string action)
     {
@@ -88,4 +58,3 @@ public static class ActionDispatcher
     }
 
 }
-
