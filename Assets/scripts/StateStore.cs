@@ -30,4 +30,21 @@ public class StateStore {
         return _floatDictionary.TryGetValue(key, out saveTo);
     }
 
+    public void SetString(string key, string value)
+    {
+        if (_stringDictionary.ContainsKey(key))
+        {
+            _stringDictionary[key] = value;
+        }
+        else
+        {
+            _stringDictionary.Add(key, value);
+        }
+    }
+
+    public bool GetString(string key, out string saveTo)
+    {
+        return _stringDictionary.TryGetValue(key, out saveTo);
+    }
+
 }
