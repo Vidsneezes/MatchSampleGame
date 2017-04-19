@@ -34,13 +34,23 @@ public class GameStateStore : MonoBehaviour {
     public void ReduceEndGame(float localScore)
     {
         stateStore.SetFloat("localscore", localScore);
+        SceneChangeStruct sceneChangeStruct;
+        sceneChangeStruct.unloadScene = "MainScene";
+        sceneChangeStruct.loadScene = "HighscoreScene";
+        StartCoroutine(SceneChangeRoutine(sceneChangeStruct));
     }
 
-    private IEnumerator ReduceEndGameRoutine()
+    private IEnumerator SceneChangeRoutine(SceneChangeStruct sceneChangeStruct)
     {
-        yield return new WaitForEndOfFrame();
+        if (sceneChangeStruct.unloadScene != "")
+        {
+            yield return StartCoroutine(UnLoadScenAsync(sceneChangeStruct.unloadScene));
+        }
+        if (sceneChangeStruct.loadScene != "")
+        {
+            yield return StartCoroutine(LoadScenAsync(sceneChangeStruct.loadScene));
+        }
     }
-
 
     private IEnumerator LoadScenAsync(string scene)
     {
@@ -61,6 +71,13 @@ public class GameStateStore : MonoBehaviour {
     }
 
 }
+
+public struct SceneChangeStruct
+{
+    public string unloadScene;
+    public string loadScene;
+}
+
 
 public static class ActionDispatcher
 {
