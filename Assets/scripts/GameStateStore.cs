@@ -18,9 +18,12 @@ public class GameStateStore : MonoBehaviour {
         }
     }
     private StateStore stateStore;
+    private string lastLoadedScene;
 
 	// Use this for initialization
 	void Start () {
+        lastLoadedScene = "";
+        ActionDispatcher.DispatchToMainMenu();
 	}
 
     public void ChangeScene(SceneChangeStruct sceneChangeStruct)
@@ -33,6 +36,12 @@ public class GameStateStore : MonoBehaviour {
         if (sceneChangeStruct.unloadScene != "")
         {
             yield return StartCoroutine(UnLoadScenAsync(sceneChangeStruct.unloadScene));
+        }else if(sceneChangeStruct.unloadScene == "#")
+        {
+            if (lastLoadedScene != "")
+            {
+                yield return StartCoroutine(UnLoadScenAsync(lastLoadedScene));
+            }
         }
         if (sceneChangeStruct.loadScene != "")
         {
@@ -47,6 +56,7 @@ public class GameStateStore : MonoBehaviour {
         {
             yield return new WaitForEndOfFrame();
         }
+        lastLoadedScene = scene;
     }
 
     private IEnumerator UnLoadScenAsync(string scene)
@@ -103,6 +113,10 @@ public static class ActionDispatcher
         GameStateStore gameStateStore;
         if (GetGameStateStore(out gameStateStore))
         {
+            SceneChangeStruct sceneChangeStruct;
+            sceneChangeStruct.unloadScene = "#";
+            sceneChangeStruct.loadScene = "MainScene";
+            gameStateStore.ChangeScene(sceneChangeStruct);
         }
     }
 
@@ -111,6 +125,10 @@ public static class ActionDispatcher
         GameStateStore gameStateStore;
         if (GetGameStateStore(out gameStateStore))
         {
+            SceneChangeStruct sceneChangeStruct;
+            sceneChangeStruct.unloadScene = "#";
+            sceneChangeStruct.loadScene = "MainScene";
+            gameStateStore.ChangeScene(sceneChangeStruct);
         }
     }
 
