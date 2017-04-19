@@ -10,14 +10,6 @@ public class GameStateStore : MonoBehaviour {
     public const string FLOAT_LOCALSCORE = "LOCAL_SCORE";
     #endregion
 
-    #region actions
-    public const string END_GAME = "END_GAME";
-    private const string MAIN_MENU = "MAIN_MENU";
-    private const string GAME = "GAME";
-    private const string HIGHSCORE = "HIGHSCORE";
-    #endregion
-    public string state;
-
     public StateStore _StateStore
     {
         get
