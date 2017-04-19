@@ -17,6 +17,14 @@ public class GameStateStore : MonoBehaviour {
     #endregion
     public string state;
 
+    public StateStore _StateStore
+    {
+        get
+        {
+            return stateStore;
+        }
+    }
+    private StateStore stateStore;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +48,7 @@ public class GameStateStore : MonoBehaviour {
         }
         yield return new WaitForEndOfFrame();
     }
+
 }
 
 public static class ActionDispatcher
@@ -55,6 +64,18 @@ public static class ActionDispatcher
         {
             gameStateStore.ReduceState(action);
         }
+    }
+
+    public static bool TryGetState(out StateStore stateStore)
+    {
+        GameStateStore gameStateStore = GameObject.FindObjectOfType<GameStateStore>();
+        if (gameStateStore != null)
+        {
+            stateStore = gameStateStore._StateStore;
+            return true;
+        }
+        stateStore = null;
+        return false;
     }
 
 }
