@@ -30,25 +30,6 @@ public class GameStateStore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
-	
-    public void ReduceState(string action)
-    {
-        StartCoroutine(ReduceStateRoutine(action));
-    }
-
-    private IEnumerator ReduceStateRoutine(string action)
-    {
-        switch (action)
-        {
-            case ActionDispatcher.START_GAME:
-                break;
-            case ActionDispatcher.GO_TO_MAINMENU:
-                break;
-            case ActionDispatcher.END_GAME:
-                break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
 
     public void ReduceEndGame(float localScore)
     {
