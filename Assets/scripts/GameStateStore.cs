@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameStateStore : MonoBehaviour {
 
     #region PlayerPrefConsts
-    private const string FLOAT_HIGHSCORE = "FLOAT_HIGHSCORE";
-    private const string FLOAT_LOCALSCORE = "LOCAL_SCORE";
+    public const string FLOAT_HIGHSCORE = "FLOAT_HIGHSCORE";
+    public const string FLOAT_LOCALSCORE = "LOCAL_SCORE";
     #endregion
 
     #region actions
@@ -30,11 +30,6 @@ public class GameStateStore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
-
-    public void ReduceEndGame(float localScore)
-    {
-     
-    }
 
     public void ChangeScene(SceneChangeStruct sceneChangeStruct)
     {
@@ -97,7 +92,13 @@ public static class ActionDispatcher
         GameStateStore gameStateStore;
         if(GetGameStateStore(out gameStateStore))
         {
-            gameStateStore._StateStore.SetFloat("localscore", localScore);
+            float highScore = 0;
+            gameStateStore._StateStore.GetFloat(GameStateStore.FLOAT_HIGHSCORE, out highScore);
+            gameStateStore._StateStore.SetFloat(GameStateStore.FLOAT_LOCALSCORE, localScore);
+            if(localScore > highScore)
+            {
+                gameStateStore._StateStore.SetFloat(GameStateStore.FLOAT_HIGHSCORE, localScore);
+            }
             SceneChangeStruct sceneChangeStruct;
             sceneChangeStruct.unloadScene = "MainScene";
             sceneChangeStruct.loadScene = "HighscoreScene";
@@ -107,12 +108,18 @@ public static class ActionDispatcher
 
     public static void DispatchGameStart()
     {
-
+        GameStateStore gameStateStore;
+        if (GetGameStateStore(out gameStateStore))
+        {
+        }
     }
 
     public static void DispatchToMainMenu()
     {
-
+        GameStateStore gameStateStore;
+        if (GetGameStateStore(out gameStateStore))
+        {
+        }
     }
 
     public static bool TryGetState(out StateStore stateStore)

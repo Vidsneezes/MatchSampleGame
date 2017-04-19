@@ -12,7 +12,13 @@ public class MainMenuContainer : MonoBehaviour {
 	// Use this for initialization
 	private void Start () {
         startButton.onClick.AddListener(OnStartButtonClicked);
-        highscoreText.text = "highscore : 00000000";
+        float highScore = 0;
+        StateStore stateStore;
+        if(ActionDispatcher.TryGetState(out stateStore))
+        {
+            stateStore.GetFloat(GameStateStore.FLOAT_HIGHSCORE, out highScore);
+        }
+        highscoreText.text = "highscore : "+  highScore.ToString("00000000");
 
 	}
 	
@@ -20,9 +26,5 @@ public class MainMenuContainer : MonoBehaviour {
     {
         ActionDispatcher.DispatchGameStart();
     }
-
-    public void SetUp(float highscore)
-    {
-        highscoreText.text = "highscore : "+highscore.ToString("00000000");
-    }
+  
 }
