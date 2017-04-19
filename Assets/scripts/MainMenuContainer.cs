@@ -18,7 +18,7 @@ public class MainMenuContainer : MonoBehaviour {
 	
 	private void OnStartButtonClicked()
     {
-        ActionDispatcher.Dispatch(ActionDispatcher.START_GAME);
+        ActionDispatcher.DispatchGameStart();
     }
 
     public void SetUp(float highscore)

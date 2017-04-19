@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateStore : MonoBehaviour {
 
@@ -49,21 +50,66 @@ public class GameStateStore : MonoBehaviour {
         yield return new WaitForEndOfFrame();
     }
 
+    public void ReduceEndGame(float localScore)
+    {
+        stateStore.SetFloat("localscore", localScore);
+    }
+
+    private IEnumerator ReduceEndGameRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+    }
+
+
+    private IEnumerator LoadScenAsync(string scene)
+    {
+        AsyncOperation asynct = SceneManager.LoadSceneAsync(scene,LoadSceneMode.Additive);
+        while (!asynct.isDone)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private IEnumerator UnLoadScenAsync(string scene)
+    {
+        AsyncOperation asynct = SceneManager.UnloadSceneAsync(scene);
+        while (!asynct.isDone)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 }
 
 public static class ActionDispatcher
 {
-    public const string START_GAME = "START_GAME";
-    public const string END_GAME = "END_GAME";
-    public const string GO_TO_MAINMENU = "GO_TO_MAINMENU";
-
-    public static void Dispatch(string action)
+    private static bool GetGameStateStore(out GameStateStore gameStateStore)
     {
-        GameStateStore gameStateStore = GameObject.FindObjectOfType<GameStateStore>();
-        if(gameStateStore != null)
+        gameStateStore = GameObject.FindObjectOfType<GameStateStore>();
+        if (gameStateStore != null)
         {
-            gameStateStore.ReduceState(action);
+            return true;
         }
+        return false;
+    }
+
+    public static void DispatchEndGame(float localScore)
+    {
+        GameStateStore gameStateStore;
+        if(GetGameStateStore(out gameStateStore))
+        {
+            gameStateStore.ReduceEndGame(localScore);
+        }
+    }
+
+    public static void DispatchGameStart()
+    {
+
+    }
+
+    public static void DispatchToMainMenu()
+    {
+
     }
 
     public static bool TryGetState(out StateStore stateStore)

@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour {
                     {
                         onTimeDone();
                     }
+                    ActionDispatcher.DispatchEndGame(totdalPoints);
                 }
                 break;
             case FAKE_MOVE:

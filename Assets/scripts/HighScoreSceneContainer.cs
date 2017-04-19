@@ -21,6 +21,6 @@ public class HighScoreSceneContainer : MonoBehaviour {
 
     private void OnContinueButtonClicked()
     {
-        ActionDispatcher.Dispatch(ActionDispatcher.GO_TO_MAINMENU);
+        ActionDispatcher.DispatchToMainMenu();
     }
 }
