@@ -9,8 +9,6 @@ public class MainMenuContainer : MonoBehaviour {
     public Button startButton;
     public Text highscoreText;
 
-    public Action onStartButtonClicked;
-
 	// Use this for initialization
 	private void Start () {
         startButton.onClick.AddListener(OnStartButtonClicked);
@@ -20,9 +18,11 @@ public class MainMenuContainer : MonoBehaviour {
 	
 	private void OnStartButtonClicked()
     {
-        if(onStartButtonClicked != null)
-        {
-            onStartButtonClicked();
-        }
+        ActionDispatcher.Dispatch(ActionDispatcher.START_GAME);
+    }
+
+    public void SetUp(float highscore)
+    {
+        highscoreText.text = "highscore : "+highscore.ToString("00000000");
     }
 }

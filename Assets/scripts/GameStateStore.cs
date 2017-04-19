@@ -4,36 +4,42 @@ using UnityEngine;
 
 public class GameStateStore : MonoBehaviour {
 
+    #region PlayerPrefConsts
+    private const string FLOAT_HIGHSCORE = "FLOAT_HIGHSCORE";
+    private const string FLOAT_LOCALSCORE = "LOCAL_SCORE";
+    #endregion
+
+    #region actions
+    public const string END_GAME = "END_GAME";
     private const string MAIN_MENU = "MAIN_MENU";
     private const string GAME = "GAME";
     private const string HIGHSCORE = "HIGHSCORE";
-
+    #endregion
     public string state;
+
 
 	// Use this for initialization
 	void Start () {
         ToMainMenu();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        if(state != "-")
-        {
-            ReduceState();
-        }
-	}
+    public void ReduceState(string action)
+    {
 
-    public void ReduceState()
+    }
+
+    private IEnumerator ReduceStateRoutine(string action)
     {
         switch (state)
         {
             case MAIN_MENU:
                 MainMenuContainer mainMenuContainer = GameObject.FindObjectOfType<MainMenuContainer>();
                 mainMenuContainer.onStartButtonClicked += ToGame;
+                float highscore = PlayerPrefs.GetFloat(FLOAT_HIGHSCORE);
                 break;
             case GAME:
                 GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
-                gameManager.onTimeDone += ToHighscore;
+                gameManager.onTimeDone += EndGame;
                 break;
             case HIGHSCORE:
                 HighScoreSceneContainer highScoreContainer = GameObject.FindObjectOfType<HighScoreSceneContainer>();
@@ -41,6 +47,7 @@ public class GameStateStore : MonoBehaviour {
                 break;
         }
         state = "-";
+        yield return new WaitForEndOfFrame();
     }
 
     private void ToMainMenu()
@@ -58,4 +65,27 @@ public class GameStateStore : MonoBehaviour {
         state = HIGHSCORE;
     }
 
+    private void EndGame()
+    {
+
+    }
+
 }
+
+public static class ActionDispatcher
+{
+    public static string START_GAME = "START_GAME";
+    public static string END_GAME = "END_GAME";
+    public static string GO_TO_MAINMENU = "GO_TO_MAINMENU";
+
+    public static void Dispatch(string action)
+    {
+        GameStateStore gameStateStore = GameObject.FindObjectOfType<GameStateStore>();
+        if(gameStateStore != null)
+        {
+            gameStateStore.ReduceState(action);
+        }
+    }
+
+}
+
