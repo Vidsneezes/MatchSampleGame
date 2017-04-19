@@ -22,6 +22,7 @@ public class GameStateStore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        stateStore = new StateStore();
         lastLoadedScene = "";
         ActionDispatcher.DispatchToMainMenu();
 	}
@@ -33,15 +34,15 @@ public class GameStateStore : MonoBehaviour {
 
     private IEnumerator SceneChangeRoutine(SceneChangeStruct sceneChangeStruct)
     {
-        if (sceneChangeStruct.unloadScene != "")
-        {
-            yield return StartCoroutine(UnLoadScenAsync(sceneChangeStruct.unloadScene));
-        }else if(sceneChangeStruct.unloadScene == "#")
+        if(sceneChangeStruct.unloadScene == "#")
         {
             if (lastLoadedScene != "")
             {
                 yield return StartCoroutine(UnLoadScenAsync(lastLoadedScene));
             }
+        } else if (sceneChangeStruct.unloadScene != "")
+        {
+            yield return StartCoroutine(UnLoadScenAsync(sceneChangeStruct.unloadScene));
         }
         if (sceneChangeStruct.loadScene != "")
         {
@@ -127,7 +128,7 @@ public static class ActionDispatcher
         {
             SceneChangeStruct sceneChangeStruct;
             sceneChangeStruct.unloadScene = "#";
-            sceneChangeStruct.loadScene = "MainScene";
+            sceneChangeStruct.loadScene = "MainMenu";
             gameStateStore.ChangeScene(sceneChangeStruct);
         }
     }
