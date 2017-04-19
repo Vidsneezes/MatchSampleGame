@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     private const string SHIFT_DOWN_TWEEN = "SHIFT_DOWN_TWEEN";
     private const string FILL_BOARD = "FILL_BOARD";
     private const string STAY_DROPDOWN_ANIMATION = "STAY_DROPDOWN_ANIMATION";
+    private const string END_GAME_DELAY = "END_GAME_DELAY";
     private const string TIME_SCHEME = "0:00";
 
     public Sprite bluePiece;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour {
 
     public float waitDelay;
     public float startDelay;
+    public float endDelay;
 
     public float time;
     public Text pointsDisplay;
@@ -120,6 +122,13 @@ public class GameManager : MonoBehaviour {
     {
         switch (boardState)
         {
+            case END_GAME_DELAY:
+                if (Time.time - startDelayCounter > endDelay)
+                {
+                    ActionDispatcher.DispatchEndGame(totdalPoints);
+                    boardState = "-";
+                }
+                break;
             case START_DELAY:
                 if(Time.time - startDelayCounter > startDelay)
                 {
@@ -139,7 +148,8 @@ public class GameManager : MonoBehaviour {
                     {
                         onTimeDone();
                     }
-                    ActionDispatcher.DispatchEndGame(totdalPoints);
+                    startDelayCounter = Time.time;
+                    boardState = END_GAME_DELAY;
                 }
                 break;
             case FAKE_MOVE:

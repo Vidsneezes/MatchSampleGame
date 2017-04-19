@@ -350,6 +350,7 @@ MonoBehaviour:
   pieceHeight: 1.385
   waitDelay: 0.3
   startDelay: 1.35
+  endDelay: 1.6
   time: 0
   pointsDisplay: {fileID: 1375618568}
   timeDisplay: {fileID: 75395674}
