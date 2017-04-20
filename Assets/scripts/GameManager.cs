@@ -33,13 +33,11 @@ public class GameManager : MonoBehaviour {
    * 4 - yellow
    */
 
-    //TODO add main menu and results screen
+        //TODO polish menus
 
-    //TODO add boot loader
+        //TODO add sound effects
 
-        //TODO add progress logic
-
-        //TODO add Progress UI
+        //TODO add music
 
 
     public BoardPieceController piecePrefab;

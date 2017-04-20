@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BoardLogic {
 
-    //TODO add conditional for going out of array bounds
 
     public int boardWidth
     {
