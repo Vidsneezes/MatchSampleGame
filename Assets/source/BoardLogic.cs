@@ -146,6 +146,11 @@ public class BoardLogic {
         movePieceMeta.dirX = dirX;
         movePieceMeta.dirY = dirY;
 
+        if(orX + dirX >= _boardWidth && orX + dirX < 0 && orY + dirY >= _boardHeight && orY + dirY < 0)
+        {
+            return movePieceMeta;
+        }
+
         if (original == boardMatrix[newPosX + newPosY * boardWidth])
         {
             movePieceMeta.same = true;
