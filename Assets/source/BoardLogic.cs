@@ -146,8 +146,9 @@ public class BoardLogic {
         movePieceMeta.dirX = dirX;
         movePieceMeta.dirY = dirY;
 
-        if(orX + dirX >= _boardWidth && orX + dirX < 0 && orY + dirY >= _boardHeight && orY + dirY < 0)
+        if(orX + dirX >= _boardWidth || orX + dirX < 0 || orY + dirY >= _boardHeight || orY + dirY < 0)
         {
+            movePieceMeta.same = true;  
             return movePieceMeta;
         }
 
