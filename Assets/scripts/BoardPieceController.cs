@@ -159,7 +159,7 @@ public class BoardPieceController : MonoBehaviour , IDragHandler, IBeginDragHand
         MovePieceMeta movePieceMeta;
         movePieceMeta.canMove = false;
         movePieceMeta.same = false;
-        movePieceMeta.dirY = Mathf.Abs(eventData.delta.y) < 5 ? 0 : (int)Mathf.Sign(-eventData.delta.y);
+        movePieceMeta.dirY = Mathf.Abs(eventData.delta.y) < 15 ? 0 : (int)Mathf.Sign(-eventData.delta.y);
         movePieceMeta.dirX = movePieceMeta.dirY == 0 ? (int)Mathf.Sign(eventData.delta.x) : 0;
 
         movePieceMeta = gameManager.CanMove(x, y, movePieceMeta.dirX, movePieceMeta.dirY);

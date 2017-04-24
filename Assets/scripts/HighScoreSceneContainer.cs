@@ -8,7 +8,7 @@ public class HighScoreSceneContainer : MonoBehaviour {
 
 
     public Button backToMainButton;
-    public Button retryButton;
+    public Button playAgainButton;
     public Text highscoreText;
     public Text localScoreText;
 
@@ -31,5 +31,10 @@ public class HighScoreSceneContainer : MonoBehaviour {
     private void OnBackToMainMenu()
     {
         ActionDispatcher.DispatchToMainMenu();
+    }
+
+    private void OnPlayAgain()
+    {
+        ActionDispatcher.DispatchGameStart();
     }
 }

@@ -1024,8 +1024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bea0b77757026548ba806676223192c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backToMainButton: {fileID: 0}
-  retryButton: {fileID: 0}
+  backToMainButton: {fileID: 1449206038}
+  playAgainButton: {fileID: 1975156255}
   highscoreText: {fileID: 1355270964}
   localScoreText: {fileID: 1517088421}
 --- !u!1 &1208996572
